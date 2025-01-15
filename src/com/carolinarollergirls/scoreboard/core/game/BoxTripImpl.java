@@ -184,6 +184,10 @@ public class BoxTripImpl extends ScoreBoardEventProviderImpl<BoxTrip> implements
         }
         if (prop == CURRENT_FIELDING && value != null) {
             Fielding f = (Fielding) value;
+            if (last == null || ((Fielding) last).getTeamJam().getProviderId() != f.getTeamJam().getProviderId() &&
+                                    !f.getTeamJam().isStarPass()) {
+                set(START_AFTER_S_P, false);
+            }
             f.set(Fielding.CURRENT_BOX_TRIP, this);
             f.set(Fielding.PENALTY_BOX, get(IS_CURRENT));
         }
