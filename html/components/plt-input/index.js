@@ -28,20 +28,28 @@
   ]);
 })();
 
-function pltSetBlocker(k) {
-  if (isTrue(WS.state[k.upTo('Team') + '.AllBlockersSet']) && WS.state[k + '.Role'] !== 'Pivot' && WS.state[k + '.Role'] !== 'Blocker') {
-    _pltOpenReplaceDialog(k, 'Blocker');
+function _pltSetRole(k, role, ignoreIneligible) {
+  const oldRole = WS.state[k + '.Role'];
+  if (oldRole === 'Ineligible' && !ignoreIneligible) {
+    _pltOpenIneligibleDialog(k, role);
+  } else if (((role === 'Blocker' && oldRole !== 'Pivot') || (role === 'Pivot' && isTrue(WS.state[k.upTo('Team') + '.NoPivot']))) &&
+    isTrue(WS.state[k.upTo('Team') + '.AllBlockersSet']) && oldRole !== 'Blocker') {
+    _pltOpenReplaceDialog(k, role);
   } else {
-    WS.Set(k + '.Role', 'Blocker');
+    WS.Set(k + '.Role', role);
   }
 }
 
+function pltSetJammer(k) {
+  _pltSetRole(k, 'Jammer', false);
+}
+
 function pltSetPivot(k) {
-  if (isTrue(WS.state[k.upTo('Team') + '.AllBlockersSet']) && isTrue(WS.state[k.upTo('Team') + '.NoPivot']) && WS.state[k + '.Role'] !== 'Blocker') {
-    _pltOpenReplaceDialog(k, 'Pivot');
-  } else {
-    WS.Set(k + '.Role', 'Pivot');
-  }
+  _pltSetRole(k, 'Pivot', false);
+}
+
+function pltSetBlocker(k) {
+  _pltSetRole(k, 'Blocker', false);
 }
 
 function pltAdvanceOrAnnotation(k, v, elem) {
@@ -117,6 +125,35 @@ function _pltOpenReplaceDialog(k, pos) {
 function pltFinishReplace(k, v, elem, event) {
   sbCloseDialog(k, v, elem, event);
   WS.Set(pltReplacePath, pltReplaceTarget);
+}
+
+//###################################################################
+//
+//  Ineligible Dialog
+//
+//###################################################################
+
+let pltIneligiblePath = '';
+let pltIneligibleTarget = '';
+
+function _pltOpenIneligibleDialog(k, role) {
+  pltIneligiblePath = k; pltIneligibleTarget = role;
+  WS.SetupDialog($('#IneligibleDialog'), k, { modal: true, title: 'Ineligible Skater', width: '400px' })
+}
+
+function pltToIneligibleReason(k, v) {
+  if (v == null) {
+    return 'an injury calloff (or similar)';
+  } else if (v === 'FO') {
+    return 'a foulout';
+  } else {
+    return 'an expulsion';
+  }
+}
+
+function pltIgnoreIneligible(k, v, elem, event) {
+  sbCloseDialog(k, v, elem, event);
+  _pltSetRole(pltIneligiblePath, pltIneligibleTarget, true);
 }
 
 //###################################################################
