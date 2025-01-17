@@ -310,7 +310,7 @@ public class ClockImpl extends ScoreBoardEventProviderImpl<Clock> implements Clo
 
     @Override
     public long getCurrentIntermissionTime() {
-        long duration = DEFAULT_MAXIMUM_TIME;
+        long duration = isRunning() ? getMaximumTime() : DEFAULT_MAXIMUM_TIME;
         String[] sequence = game.get(Rule.INTERMISSION_DURATIONS).split(",");
         int number = Math.min(game.getCurrentPeriodNumber(), sequence.length);
         if (number > 0) { duration = ClockConversion.fromHumanReadable(sequence[number - 1]); }
