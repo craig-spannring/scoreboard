@@ -51,12 +51,9 @@
 
         <div class="ClockBox TopClock AnimatedPanel PanelHideTop Wrapper" sbClass="Show: $.Clock">
           <div
-            class="ClockBarTop Wrapper Row SlideDown ClockNames ShowInJam ShowInLineup ShowInTimeout ShowInIntermission ShowInNoClock barBackgroundTop"
+            class="ClockBarTop Wrapper Row SlideDown ClockNames ShowInJam ShowInLineup ShowInTimeout ShowInSecondLineup ShowInIntermission ShowInNoClock barBackgroundTop"
           >
-            <div
-              class="Box TextLeft Name"
-              sbDisplay="Clock(Period).Name,Clock(Period).Number,Rule(Period.Number): sbToClockInitialNumber"
-            ></div>
+            <div class="Box TextLeft Name" sbDisplay="Clock(Period).Name,Clock(Period).Number,Rule(Period.Number): sbToClockInitialNumber"></div>
             <div
               class="Box TextRight Clock ShowInJam ShowInIntermission ShowInLineup ShowInTimeout Name"
               sbContext="Clock(Jam)"
@@ -65,12 +62,12 @@
           </div>
 
           <div
-            class="ClockBarMiddle Wrapper SlideDown ShowInIntermission ShowInLineup ShowInTimeout ShowInNoClock Box BigName ClockDescription"
+            class="ClockBarMiddle Wrapper SlideDown ShowInIntermission ShowInLineup ShowInTimeout ShowInSecondLineup ShowInNoClock Box BigName ClockDescription"
             sbDisplay="Clock(Intermission).Number, Clock(*).Running, TimeoutOwner, OfficialReviews, ^Settings.Setting(ScoreBoard.Intermission.*), OfficialScore, ClockDuringFinalScore, Rule(Period.Number): ovlToClockType"
           ></div>
           <div class="ClockBarBottom Wrapper Row BottomRow barBackgroundBottom">
             <div
-              class="Box TextLeft Time Clock Show ShowInJam ShowInLineup ShowInTimeout"
+              class="Box TextLeft Time Clock Show ShowInJam ShowInLineup ShowInTimeout ShowInSecondLineup"
               sbContext="Clock(Period)"
               sbDisplay="Time, Direction: sbToTime"
             ></div>
@@ -80,7 +77,11 @@
               sbDisplay="Time, Direction: sbToTime"
             ></div>
             <div class="Box TextRight Time Clock Show ShowInJam" sbContext="Clock(Jam)" sbDisplay="Time, Direction: sbToTime"></div>
-            <div class="Box TextRight Time Clock ShowInLineup" sbContext="Clock(Lineup)" sbDisplay="Time, Direction: sbToTime"></div>
+            <div
+              class="Box TextRight Time Clock ShowInLineup ShowInSecondLineup"
+              sbContext="Clock(Lineup)"
+              sbDisplay="Time, Direction: sbToTime"
+            ></div>
             <div class="Box TextRight Time Clock ShowInTimeout" sbContext="Clock(Timeout)" sbDisplay="Time, Direction: sbToTime"></div>
           </div>
         </div>

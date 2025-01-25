@@ -47,7 +47,7 @@
           <td class="Role Bench sbShowOnLt" rowspan="2" sbClass="OnTrack: Role: ==='Bench'" sbSet="Role: 'Bench'">
             <span class="Num" sbDisplay="RosterNumber"></span><span class="Pos" sbDisplay="RosterNumber"></span>
           </td>
-          <td class="Role Jammer sbShowOnLt" rowspan="2" sbClass="OnTrack: Role: ==='Jammer'" sbSet="Role: 'Jammer'">
+          <td class="Role Jammer sbShowOnLt" rowspan="2" sbClass="OnTrack: Role: ==='Jammer'" sbCall="pltSetJammer">
             <span class="Num" sbDisplay="RosterNumber"></span><span class="Pos">J</span>
           </td>
           <td class="Role Pivot sbShowOnLt" rowspan="2" sbClass="OnTrack: Role: ==='Pivot'" sbCall="pltSetPivot">
@@ -63,13 +63,7 @@
             sbClass="Show: Role: sbIsOnTrackRole | Advance: ^FieldingAdvancePending"
             sbCall="pltAdvanceOrAnnotation"
           ></td>
-          <td
-            class="Number sbShowOnPt"
-            rowspan="2"
-            sbClass="OnTrack: Role: sbIsOnTrackRole"
-            sbDisplay="RosterNumber"
-            sbCall="pltAddPenalty"
-          ></td>
+          <td class="Number sbShowOnPt" rowspan="2" sbClass="OnTrack: Role: sbIsOnTrackRole" sbDisplay="RosterNumber" sbCall="pltAddPenalty"></td>
           <td
             sbForeach="Penalty: 1,2,3,4,5,6,7,8,9,0: only"
             class="Penalty sbShowOnPt ShowWarn"
@@ -152,6 +146,20 @@
       </div>
     </div>
   </div>
+  <div id="IneligibleDialog" sbContext="Skater(*)">
+    <div class="sbSegment">
+      <div class="sbGroup sbStack">
+        <span
+          >#<span sbDisplay="RosterNumber"></span> is marked as ineligible to participate in this jam due to
+          <span sbDisplay="Penalty(0).Code: pltToIneligibleReason"></span>.
+        </span>
+        <span>
+          <button sbCall="pltIgnoreIneligible">Field anyways</button>
+          <button sbCall="sbCloseDialog">Cancel</button>
+        </span>
+      </div>
+    </div>
+  </div>
   <div id="PenaltyEditor" sbContext="Skater(*).Penalty(*)">
     <div class="sbSegment" sbPrefix="p:[*]">
       <div class="sbGroup" sbContext="^^^">
@@ -207,12 +215,7 @@
     <div class="sbSegment">
       <div class="sbGroup" sbPrefix="f:[*]">
         <span sbClass="sbHide: PenaltyBox: !">Substitute: </span>
-        <span
-          sbClass="sbHide: f.PenaltyBox: !"
-          sbContext="/ScoreBoard.Game([game]).Team([TeamJam])"
-          sbAttr="oldNumber: f.SkaterNumber"
-          sbButtonGroup
-        >
+        <span sbClass="sbHide: f.PenaltyBox: !" sbContext="/ScoreBoard.Game([game]).Team([TeamJam])" sbAttr="oldNumber: f.SkaterNumber" sbButtonGroup>
           <button
             sbForeach="Skater:: rosterNumber: resort=RosterNumber"
             sbAttr="rosterNumber: RosterNumber"

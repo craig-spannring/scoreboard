@@ -89,16 +89,16 @@ public class SkaterImpl extends ScoreBoardEventProviderImpl<Skater> implements S
             return last;
         }
         if (prop == CURRENT_PENALTIES) {
-            if (isPenaltyBox() && getCurrentFielding() != null && getCurrentFielding().getCurrentBoxTrip() != null) {
-                return getCurrentFielding().getCurrentBoxTrip().get(BoxTrip.PENALTY_CODES);
+            if (isPenaltyBox() && getCurrentBoxTrip() != null) {
+                return getCurrentBoxTrip().get(BoxTrip.PENALTY_CODES);
             }
             List<Penalty> penalties = getUnservedPenalties();
             Collections.sort(penalties);
             value = penalties.stream().map(Penalty::getCode).collect(Collectors.joining(" "));
         }
         if (prop == PENALTY_DETAILS) {
-            if (isPenaltyBox() && getCurrentFielding() != null && getCurrentFielding().getCurrentBoxTrip() != null) {
-                return getCurrentFielding().getCurrentBoxTrip().get(BoxTrip.PENALTY_DETAILS);
+            if (isPenaltyBox() && getCurrentBoxTrip() != null) {
+                return getCurrentBoxTrip().get(BoxTrip.PENALTY_DETAILS);
             }
             List<Penalty> penalties = getUnservedPenalties();
             Collections.sort(penalties);
@@ -336,7 +336,15 @@ public class SkaterImpl extends ScoreBoardEventProviderImpl<Skater> implements S
 
     @Override
     public boolean isPenaltyBox() {
-        return get(PENALTY_BOX);
+        return isPenaltyBox(false);
+    }
+    @Override
+    public boolean isPenaltyBox(boolean checkUpcoming) {
+        if (checkUpcoming && !game.isInJam() && getFielding(getTeam().getRunningOrUpcomingTeamJam()) != null) {
+            return getFielding(getTeam().getRunningOrUpcomingTeamJam()).isInBox();
+        } else {
+            return get(PENALTY_BOX);
+        }
     }
     @Override
     public void setPenaltyBox(boolean box) {
@@ -350,6 +358,17 @@ public class SkaterImpl extends ScoreBoardEventProviderImpl<Skater> implements S
     @Override
     public void setFlags(String f) {
         set(FLAGS, f);
+    }
+
+    @Override
+    public BoxTrip getCurrentBoxTrip() {
+        if (!game.isInJam() && getFielding(getTeam().getRunningOrUpcomingTeamJam()) != null) {
+            return getFielding(getTeam().getRunningOrUpcomingTeamJam()).getCurrentBoxTrip();
+        } else if (getCurrentFielding() != null) {
+            return getCurrentFielding().getCurrentBoxTrip();
+        } else {
+            return null;
+        }
     }
 
     @Override

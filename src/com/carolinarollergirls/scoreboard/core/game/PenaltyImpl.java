@@ -28,7 +28,7 @@ public class PenaltyImpl extends NumberedScoreBoardEventProviderImpl<Penalty> im
         setCopy(PERIOD_NUMBER, this, JAM, Jam.PERIOD_NUMBER, true);
         set(FORCE_SERVED, !Boolean.valueOf(scoreBoard.getSettings().get(ScoreBoard.SETTING_USE_LT)) ||
                               Skater.FO_EXP_ID.equals(getProviderId()));
-        if (s.isPenaltyBox()) { set(BOX_TRIP, s.getCurrentFielding().getCurrentBoxTrip()); }
+        if (s.isPenaltyBox(true)) { set(BOX_TRIP, s.getCurrentBoxTrip()); }
         set(SERVED, get(BOX_TRIP) != null);
         set(CODE, "?");
         set(JAM, game.getCurrentPeriod().getCurrentJam(), Flag.SPECIAL_CASE);
