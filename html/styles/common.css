@@ -39,7 +39,7 @@
     --element-clickme-bg: #ff9010;
     --element-clickme-fg: var(--group-fg);
     --element-inbox-bg: #e33;
-    --element-inbox-fg: var(--group-fg);
+    --element-inbox-fg: #fff;
     --element-unserved-bg: #0ee;
     --element-unserved-fg: var(--group-fg);
 
@@ -93,7 +93,7 @@ div.sbSheets { height: calc(100% - 10px); align-items: flex-start; flex-wrap: wr
 .sbActive, .ui-button.sbActive { background: var(--element-active-bg); color: var(--element-active-fg); box-shadow: var(--button-active-shadow); transform: var(--button-active-transform); }
 .sbClickMe, .ui-button.sbClickMe { background: var(--element-clickme-bg); color: var(--element-clickme-fg); }
 .sbUnserved, .ui-button.sbUnserved { background: var(--element-unserved-bg); color: var(--element-unserved-fg); }
-.sbInBox, .ui-button.sbInBox { background: var(--element-inbox-bg); color: var(--button-inbox-fg); box-shadow: var(--button-active-shadow); transform: var(--button-active-transform); }
+.sbInBox, .ui-button.sbInBox { background: var(--element-inbox-bg); color: var(--element-inbox-fg); box-shadow: var(--button-active-shadow); transform: var(--button-active-transform); }
 .ui-button:hover { box-shadow: var(--button-hover-shadow); transform: var(--button-hover-transform); }
 .ui-button:hover.sbActive, .ui-button:hover.sbInBox { box-shadow: var(--button-active-hover-shadow);  transform: var(--button-active-transform); }
 .ui-button:active, .ui-button:active.sbActive { box-shadow: var(--button-clicked-shadow); transform: var(--button-clicked-transform); }
