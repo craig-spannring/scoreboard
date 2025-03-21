@@ -28,6 +28,11 @@ import com.carolinarollergirls.scoreboard.utils.BasePath;
 
 public class MediaImplTests {
 
+    // In general Java's macOS implementation takes longer for file system notifications.
+    private static final int secondsToWait = (System.getProperty("os.name").toLowerCase().matches("^mac.*os.*$")
+                                              ? 10 
+                                              : 1);
+
     private Media media;
     private File init;
 
@@ -75,8 +80,8 @@ public class MediaImplTests {
     @Test
     public void testFileDeletionManual() throws Exception {
         init.delete();
-        ScoreBoardEvent<?> e = collectedEvents.poll(1, TimeUnit.SECONDS); // batch start
-        e = collectedEvents.poll(1, TimeUnit.SECONDS);
+        ScoreBoardEvent<?> e = collectedEvents.poll(secondsToWait, TimeUnit.SECONDS); // batch start
+        e = collectedEvents.poll(secondsToWait, TimeUnit.SECONDS);
         assertNotNull(e);
         assertEquals(MediaType.FILE, e.getProperty());
         assertTrue(e.isRemove());
@@ -86,8 +91,8 @@ public class MediaImplTests {
     @Test
     public void testFileDeletion() throws Exception {
         assertTrue(media.removeMediaFile("images", "teamlogo", "init.png"));
-        ScoreBoardEvent<?> e = collectedEvents.poll(1, TimeUnit.SECONDS); // batch start
-        e = collectedEvents.poll(1, TimeUnit.SECONDS);
+        ScoreBoardEvent<?> e = collectedEvents.poll(secondsToWait, TimeUnit.SECONDS); // batch start
+        e = collectedEvents.poll(secondsToWait, TimeUnit.SECONDS);
         assertNotNull(e);
         assertEquals(MediaType.FILE, e.getProperty());
         assertTrue(e.isRemove());
@@ -97,7 +102,7 @@ public class MediaImplTests {
     @Test
     public void testFileCreation() throws Exception {
         dir.newFile("html/images/teamlogo/new.png");
-        ScoreBoardEvent<?> e = collectedEvents.poll(1, TimeUnit.SECONDS);
+        ScoreBoardEvent<?> e = collectedEvents.poll(secondsToWait, TimeUnit.SECONDS);
         assertNotNull(e);
         assertEquals(ScoreBoardEventProviderImpl.BATCH_START, e.getProperty());
         e = collectedEvents.poll(1, TimeUnit.SECONDS);
