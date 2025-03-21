@@ -448,7 +448,14 @@ public class ScoreBoardJSONListenerTests {
         sb.getMedia().removeMediaFile("images", "teamlogo", "init.png");
         dir.newFile("html/images/fullscreen/new.png");
 
-        Thread.sleep(100);
+        // 
+        // Notifications on Linux use the inotify interface and has 
+        // minimal lag. Java's macOS uses polling and can have 
+        // significant lag, up to 10 seconds.
+        // 
+        Thread.sleep(System.getProperty("os.name").toLowerCase().matches("^mac.*os.*$")
+                     ? 10000 
+                     : 100);
         assertEquals(null, state.get("ScoreBoard.Media.Format(images).Type(teamlogo.File(init.png).Id"));
         assertEquals(null, state.get("ScoreBoard.Media.Format(images).Type(teamlogo.File(init.png).Name"));
         assertEquals(null, state.get("ScoreBoard.Media.Format(images).Type(teamlogo.File(init.png).Src"));
