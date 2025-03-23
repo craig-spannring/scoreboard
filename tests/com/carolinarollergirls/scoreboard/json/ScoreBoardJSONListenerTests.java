@@ -448,11 +448,7 @@ public class ScoreBoardJSONListenerTests {
         sb.getMedia().removeMediaFile("images", "teamlogo", "init.png");
         dir.newFile("html/images/fullscreen/new.png");
 
-        // 
-        // Notifications on Linux use the inotify interface and has 
-        // minimal lag. Java's macOS uses polling and can have 
-        // significant lag, up to 10 seconds.
-        // 
+        // In general Java's macOS implementation takes longer for file system notifications.
         Thread.sleep(System.getProperty("os.name").toLowerCase().matches("^mac.*os.*$")
                      ? 10000 
                      : 100);
