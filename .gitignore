@@ -27,3 +27,4 @@ android/build/
 /game-data/
 /node_modules/
 /package-lock.json
+/jdoc/
