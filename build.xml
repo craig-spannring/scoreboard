@@ -177,7 +177,9 @@
 		<javadoc
 			packagenames="com.carolinarollergirls.scoreboard.*"
 			sourcepath="${src.dir}"
+                        classpath="${jar.dir}/deps/*"
 			destdir="${jdoc.dir}"
+                        overview="${src.dir}/overview.html"
 		/>
 		<echo message="Java Documentation placed in ${jdoc.dir}"/>
 	</target>
