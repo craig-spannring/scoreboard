@@ -28,3 +28,4 @@ android/build/
 /node_modules/
 /package-lock.json
 /jdoc/
+spotbugs-report.xml
