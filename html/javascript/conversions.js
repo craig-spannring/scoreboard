@@ -70,7 +70,6 @@ function sbToTimeoutDuration(k, v) {
 }
 
 function sbToToTypeVal(k, v) {
-  console.log(WS.state[k.upTo('Timeout') + '.Owner'] + '.' + v);
   return WS.state[k.upTo('Timeout') + '.Owner'] + '.' + v;
 }
 
