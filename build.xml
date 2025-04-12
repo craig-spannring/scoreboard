@@ -95,14 +95,14 @@
 		<mkdir dir="${dest.dir}"/>
 		<mkdir dir="html/images/teamlogo" />
 		<mkdir dir="html/images/sponsor_banner" />
-		<javac srcdir="."
+		<javac srcdir="${src.dir}"
 			destdir="${dest.dir}"
 			deprecation="${compile.deprecation}"
 			debug="${compile.debug}"
 			verbose="${compile.verbose}"
 			nowarn="${compile.nowarn}"
 			includeAntRuntime="false"
-			includes="${src.dir}/com/carolinarollergirls/scoreboard/**" >
+			includes="com/carolinarollergirls/scoreboard/**" >
 
 			<compilerarg value="-Xlint:all"/>
 			<compilerarg value="-Xlint:-serial"/>
