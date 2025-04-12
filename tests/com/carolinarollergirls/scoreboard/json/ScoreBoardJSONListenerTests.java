@@ -448,7 +448,10 @@ public class ScoreBoardJSONListenerTests {
         sb.getMedia().removeMediaFile("images", "teamlogo", "init.png");
         dir.newFile("html/images/fullscreen/new.png");
 
-        Thread.sleep(100);
+        // In general Java's macOS implementation takes longer for file system notifications.
+        Thread.sleep(System.getProperty("os.name").toLowerCase().matches("^mac.*os.*$")
+                     ? 10000 
+                     : 100);
         assertEquals(null, state.get("ScoreBoard.Media.Format(images).Type(teamlogo.File(init.png).Id"));
         assertEquals(null, state.get("ScoreBoard.Media.Format(images).Type(teamlogo.File(init.png).Name"));
         assertEquals(null, state.get("ScoreBoard.Media.Format(images).Type(teamlogo.File(init.png).Src"));
