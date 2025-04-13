@@ -528,24 +528,24 @@ var WS = {
     const val = WS._replacePathComponents(elem, attr, isPreRegister)[0];
     return val
       ? val.split('|').map(function (part) {
-          var list = part.split(':').map(function (s) {
-            return s.trim();
+        var list = part.split(':').map(function (s) {
+          return s.trim();
+        });
+        if (pathIndex > -1) {
+          const prefixes = WS._getPrefixes(elem, isPreRegister);
+          const basePath = WS._getContext(elem, attr === 'sbForeach', isPreRegister);
+          list[pathIndex] = list[pathIndex].split(',').map(function (item) {
+            return WS._combinePaths(basePath, [item.trim(), false], prefixes)[0];
           });
-          if (pathIndex > -1) {
-            const prefixes = WS._getPrefixes(elem, isPreRegister);
-            const basePath = WS._getContext(elem, attr === 'sbForeach', isPreRegister);
-            list[pathIndex] = list[pathIndex].split(',').map(function (item) {
-              return WS._combinePaths(basePath, [item.trim(), false], prefixes)[0];
-            });
-          }
-          if (readFuncIndex > -1 && (isBool || list[readFuncIndex] != null || list[pathIndex].length > 1 || alwaysReadState)) {
-            list[readFuncIndex] = WS._getModifyFunc(list[pathIndex], list[readFuncIndex] || '', isBool, alwaysReadState);
-          }
-          if (writeFuncIndex > -1) {
-            list[writeFuncIndex] = WS._getModifyFunc([], list[writeFuncIndex] || '', isBool);
-          }
-          return list;
-        })
+        }
+        if (readFuncIndex > -1 && (isBool || list[readFuncIndex] != null || list[pathIndex].length > 1 || alwaysReadState)) {
+          list[readFuncIndex] = WS._getModifyFunc(list[pathIndex], list[readFuncIndex] || '', isBool, alwaysReadState);
+        }
+        if (writeFuncIndex > -1) {
+          list[writeFuncIndex] = WS._getModifyFunc([], list[writeFuncIndex] || '', isBool);
+        }
+        return list;
+      })
       : [];
   },
 
@@ -605,7 +605,7 @@ var WS = {
   },
 
   _isInputElement: function (elem) {
-    return elem.prop('tagName') === 'INPUT' || elem.prop('tagName') === 'SELECT';
+    return elem.prop('tagName') === 'INPUT' || elem.prop('tagName') === 'SELECT' || elem.prop('tagName') === 'TEXTAREA';
   },
   _eventType: function (elem) {
     return WS._isInputElement(elem) ? 'change' : 'click';
@@ -664,8 +664,8 @@ var WS = {
       var [paths, fixedKeys, sortFunction, optionsString] = forEachEntries[0];
       fixedKeys = fixedKeys
         ? fixedKeys.split(',').map(function (s) {
-            return s.trim();
-          })
+          return s.trim();
+        })
         : [];
       var blockedKeys = {};
       var options = {};

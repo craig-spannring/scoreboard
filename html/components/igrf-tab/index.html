@@ -186,7 +186,7 @@
         <th><input type="text" size="30" class="League" sbOn="keyup: igrfUpdateAddButton | paste: igrfPasteOfficials" /></th>
         <th><input type="text" size="10" class="Cert" sbOn="keyup: igrfUpdateAddButton | paste: igrfPasteOfficials" /></th>
         <th></th>
-        <th rowspan="2"><button class="AddOfficial" sbCall="igrfAddOfficial">Add</button></th>
+        <th rowspan="2"><button disabled class="AddOfficial ui-button-disabled ui-state-disabled" sbCall="igrfAddOfficial">Add</button></th>
       </tr>
       <tr class="AddPreparedOfficial sbSubHeader">
         <th colspan="2">
@@ -197,6 +197,7 @@
               sbForeach="PreparedOfficial::info"
               sbAttr="value: Id | info: FullInfo"
               sbDisplay="FullInfo"
+              sbCall="igrfUpdateAddButton"
             ></option>
           </select>
         </th>
