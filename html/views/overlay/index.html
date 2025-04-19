@@ -41,7 +41,7 @@
                 >
                   <div class="Number" sbDisplay="RosterNumber"></div>
                   <div class="Name" sbDisplay="Name"></div>
-                  <div class="PenaltyClock" sbDisplay="PenaltyTime: sbToLongTime"></div>
+                  <div class="PenaltyClock sbClock" sbDisplay="PenaltyTime: sbToLongTime"></div>
                   <div class="Penalties" sbDisplay="CurrentPenalties"></div>
                 </div>
               </div>
@@ -67,22 +67,22 @@
           ></div>
           <div class="ClockBarBottom Wrapper Row BottomRow barBackgroundBottom">
             <div
-              class="Box TextLeft Time Clock Show ShowInJam ShowInLineup ShowInTimeout ShowInSecondLineup"
+              class="Box TextLeft Time Clock Show ShowInJam ShowInLineup ShowInTimeout ShowInSecondLineup sbClock"
               sbContext="Clock(Period)"
               sbDisplay="Time, Direction: sbToTime"
             ></div>
             <div
-              class="Box BoxLarge TextCenter Time Intermission Clock ShowInIntermission"
+              class="Box BoxLarge TextCenter Time Intermission Clock ShowInIntermission sbClock"
               sbContext="Clock(Intermission)"
               sbDisplay="Time, Direction: sbToTime"
             ></div>
-            <div class="Box TextRight Time Clock Show ShowInJam" sbContext="Clock(Jam)" sbDisplay="Time, Direction: sbToTime"></div>
+            <div class="Box TextRight Time Clock Show ShowInJam sbClock" sbContext="Clock(Jam)" sbDisplay="Time, Direction: sbToTime"></div>
             <div
-              class="Box TextRight Time Clock ShowInLineup ShowInSecondLineup"
+              class="Box TextRight Time Clock ShowInLineup ShowInSecondLineup sbClock"
               sbContext="Clock(Lineup)"
               sbDisplay="Time, Direction: sbToTime"
             ></div>
-            <div class="Box TextRight Time Clock ShowInTimeout" sbContext="Clock(Timeout)" sbDisplay="Time, Direction: sbToTime"></div>
+            <div class="Box TextRight Time Clock ShowInTimeout sbClock" sbContext="Clock(Timeout)" sbDisplay="Time, Direction: sbToTime"></div>
           </div>
         </div>
       </div>

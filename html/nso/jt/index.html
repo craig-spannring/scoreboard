@@ -11,10 +11,8 @@
     <div class="Clocks">
       <div class="Group Period">
         <div class="Clock" sbClass="sbHide: ^Clock(Intermission).Running | Running: Running | NoMoreJam: ^NoMoreJam" sbContext="Clock(Period)">
-          <div class="ClockName AutoFit">
-            <span sbDisplay="Name" sbAutoFitOn="Running"></span> <span sbDisplay="Number"></span>
-          </div>
-          <div class="Time AutoFit">
+          <div class="ClockName AutoFit"><span sbDisplay="Name" sbAutoFitOn="Running"></span> <span sbDisplay="Number"></span></div>
+          <div class="Time AutoFit sbClock">
             <button sbSet="Time: -1000: change">-</button>
             <span sbDisplay="Time: sbToLongTime"></span>
             <button sbSet="Time: +1000: change">+</button>
@@ -22,7 +20,7 @@
         </div>
         <div class="Clock" sbClass="sbHide: Running: ! | Running: Running" sbContext="Clock(Intermission)">
           <div class="ClockName AutoFit"><span sbDisplay="Name" sbAutoFitOn="Running"></span> <span sbDisplay="Number"></span></div>
-          <div class="Time AutoFit">
+          <div class="Time AutoFit sbClock">
             <button sbSet="Time: -1000: change">-</button>
             <span sbDisplay="Time: sbToLongTime"></span>
             <button sbSet="Time: +1000: change">+</button>
@@ -32,7 +30,7 @@
       <div class="Group Jam">
         <div sbForeach="Clock: Jam, Lineup, Timeout: only" class="Clock" sbClass="Running: Running | InJam: ^InJam | NoMoreJam: ^NoMoreJam">
           <div class="ClockName AutoFit"><span sbDisplay="Name"></span> <span sbDisplay="Number"></span></div>
-          <div class="Time AutoFit">
+          <div class="Time AutoFit sbClock">
             <button sbSet="Time: -1000: change">-</button>
             <span sbDisplay="Time: sbToLongTime"></span>
             <button sbSet="Time: +1000: change">+</button>
@@ -56,9 +54,7 @@
           </div>
           <div class="ToButtonRow OR">
             <div class="Button">
-              <button class="AutoFit" sbClass="sbActive: Id,^TimeoutOwner, ^OfficialReview: sbIsOrThisTeam" sbSet="OfficialReview">
-                Review
-              </button>
+              <button class="AutoFit" sbClass="sbActive: Id,^TimeoutOwner, ^OfficialReview: sbIsOrThisTeam" sbSet="OfficialReview">Review</button>
             </div>
             <div class="Count AutoFit" sbDisplay="OfficialReviews"></div>
           </div>
@@ -100,12 +96,7 @@
         ></button>
       </div>
       <div class="Stop">
-        <button
-          class="AutoFit Big"
-          sbClass="sbClickMe: InJam, Clock(Jam).Running: sbJamTooLong"
-          sbSet="StopJam"
-          sbDisplay="Label(Stop)"
-        ></button>
+        <button class="AutoFit Big" sbClass="sbClickMe: InJam, Clock(Jam).Running: sbJamTooLong" sbSet="StopJam" sbDisplay="Label(Stop)"></button>
       </div>
       <div class="Timeout">
         <button
