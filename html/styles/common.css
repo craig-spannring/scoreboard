@@ -50,7 +50,7 @@
     --button-shadow: var(--button-border-color) 2px 2px;
     --button-transform: translate(-2px, -2px);
     --button-font-size: 0.9em;
-    --button-font-weight: bold;
+    --button-font-weight: 500;
     --button-hover-shadow: var(--button-border-color) 1px 1px;
     --button-hover-transform: translate(-1px, -1px);
     --button-clicked-shadow: var(--button-border-color) 3px 3px inset;
@@ -110,6 +110,8 @@ div.sbSheets { height: calc(100% - 10px); align-items: flex-start; flex-wrap: wr
 .ui-button.sbVeryVeryImportant { font-size: calc(.9 * var(--very-very-important-font-size)); font-weight: var(--very-very-important-font-weight); }
 
 .sbIneligible { opacity: .35 }
+
+.sbClock { font-variant-numeric: tabular-nums; }
 
 .sbClickable { cursor: pointer; }
 

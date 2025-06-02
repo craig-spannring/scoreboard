@@ -19,8 +19,8 @@
     </div>
     <div class="sbGroup sbHide" id="KeyEditHelp">
       <span
-        >Key Control Edit mode enabled. Keys do not operate in this mode but clicking buttons still DOES perform the action. Move the mouse
-        over a button, then press a normal key (not ESC, Enter, F1, etc.) to assign. Backspace/Delete to remove.</span
+        >Key Control Edit mode enabled. Keys do not operate in this mode but clicking buttons still DOES perform the action. Move the mouse over a
+        button, then press a normal key (not ESC, Enter, F1, etc.) to assign. Backspace/Delete to remove.</span
       >
     </div>
     <div class="sbGroup sbHide" id="EndOfPeriod">
@@ -87,13 +87,13 @@
       <div class="sbGroup Name" sbClass="Running: Running | InJam: ^InJam | NoMoreJam: ^NoMoreJam" sbCall="opClockDialog">
         <span>
           <span class="sbImportant" sbDisplay="Name"></span>
-          <span class="InvertedTime" sbClass="CountDown: Direction" sbDisplay="InvertedTime: sbToLongTime"></span>
+          <span class="InvertedTime sbClock" sbClass="CountDown: Direction" sbDisplay="InvertedTime: sbToLongTime"></span>
         </span>
       </div>
       <div class="sbGroup Number"><span class="sbImportant" sbDisplay="Number" sbCall="opClockNumberDialog"></span></div>
       <div class="sbGroup Time">
         <button sbAttr="id:-:'Clock[Clock]TimeDown'" class="sbKeyControl" sbSet="Time: -1000: change">-1</button>
-        <span class="sbVeryImportant" sbDisplay="Time: sbToLongTime" sbCall="opClockDialog"></span>
+        <span class="sbVeryImportant sbClock" sbDisplay="Time: sbToLongTime" sbCall="opClockDialog"></span>
         <button sbAttr="id:-:'Clock[Clock]TimeUp'" class="sbKeyControl" sbSet="Time: +1000: change">+1</button>
       </div>
     </div>
@@ -254,7 +254,7 @@
 
   <div id="ClockDialog" sbContext="Clock(*)">
     <div class="sbSegment Time">
-      <div class="sbGroup sbHeader Value">
+      <div class="sbGroup sbHeader Value sbClock">
         <span>
           <span class="label">Time: </span>
           <span sbDisplay="Time: sbToLongTime"></span>
@@ -273,7 +273,7 @@
       </div>
     </div>
     <div class="sbSegment MaximumTime">
-      <div class="sbGroup sbHeader Value">
+      <div class="sbGroup sbHeader Value sbClock">
         <span>
           <span class="label">Maximum Time: </span>
           <span sbDisplay="MaximumTime: sbToLongTime"></span>
@@ -381,12 +381,7 @@
           </td>
           <td>
             <select sbControl="PrecedingJam">
-              <option
-                sbContext="^^Period([Period])"
-                sbForeach="Jam:: number,num"
-                sbAttr="value:Id | number: Number"
-                sbDisplay="Number"
-              ></option>
+              <option sbContext="^^Period([Period])" sbForeach="Jam:: number,num" sbAttr="value:Id | number: Number" sbDisplay="Number"></option>
             </select>
           </td>
           <td>

@@ -59,6 +59,7 @@ _include('/javascript', [
   'sortfunctions.js',
   'utils.js',
 ]);
+_include('/fonts/inter', ['inter.css']);
 _include('/styles', ['fonts.css', 'common.css']);
 _include('/json', ['WS.js'], function () {
   WS.Connect();
