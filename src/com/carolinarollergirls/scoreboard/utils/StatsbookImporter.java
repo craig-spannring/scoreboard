@@ -51,6 +51,7 @@ public class StatsbookImporter {
     }
 
     private void readIgrfHead(Sheet igrf) {
+        isJrda = igrf.getRow(0).getCell(0).getStringCellValue().startsWith("JRDA");
         Row row = igrf.getRow(2);
         readEventInfoCell(row, 1, Game.INFO_VENUE);
         readEventInfoCell(row, 8, Game.INFO_CITY);
@@ -66,13 +67,13 @@ public class StatsbookImporter {
             dateString =
                 LocalDate.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE).format(DateTimeFormatter.ISO_LOCAL_DATE);
             game.add(Game.EVENT_INFO, new ValWithId(Game.INFO_DATE, dateString));
-        } catch (DateTimeParseException e) {}
+        } catch (DateTimeParseException e) { Logger.printMessage("date parse failed: " + e.getLocalizedMessage()); }
         try {
-            String timeString = readCell(row, 8);
+            String timeString = readCell(row, isJrda ? 5 : 8);
             // convert from format used in statsbook to HH:mm
             timeString = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("h:mm a")).toString();
             game.add(Game.EVENT_INFO, new ValWithId(Game.INFO_START_TIME, timeString));
-        } catch (DateTimeParseException e) {}
+        } catch (DateTimeParseException e) { Logger.printMessage("time parse failed: " + e.getLocalizedMessage()); }
     }
 
     private void readTeam(Sheet igrf, String teamId) {
@@ -102,7 +103,7 @@ public class StatsbookImporter {
 
     private void readOfficials(Sheet igrf) {
         Child<Official> type = Game.NSO;
-        for (int i = 59; i < 88; ++i) { type = readOfficial(igrf.getRow(i), type); }
+        for (int i = isJrda ? 61 : 59; i < (isJrda ? 82 : 88); ++i) { type = readOfficial(igrf.getRow(i), type); }
     }
 
     private Child<Official> readOfficial(Row row, Child<Official> lastType) {
@@ -132,15 +133,6 @@ public class StatsbookImporter {
         if ("".equals(name)) { return type; }
         String league = readCell(row, 7);
         String cert = readCell(row, 10);
-        if (cert.endsWith("1")) {
-            cert = "1";
-        } else if (cert.endsWith("2")) {
-            cert = "2";
-        } else if (cert.endsWith("3")) {
-            cert = "3";
-        } else if (cert.startsWith("R")) {
-            cert = "R";
-        }
         Official newO = null;
         if (type == Game.NSO) {
             for (Official o : game.getAll(type)) {
@@ -191,6 +183,7 @@ public class StatsbookImporter {
     Game game;
     Workbook wb;
     DataFormatter formatter = new DataFormatter();
+    boolean isJrda = false;
 
     Object coreLock = ScoreBoardEventProviderImpl.getCoreLock();
 }
