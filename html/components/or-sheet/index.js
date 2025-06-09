@@ -24,3 +24,12 @@ function orToJamNumber(k, v) {
 function orToTeamName(k, v) {
   return WS.state[k.upTo('Game') + '.Team(' + v.split('_')[1] + ').Name'];
 }
+
+function orToPeriodClock(k, v) {
+  const clockPath = WS._enrichProp(k.upTo('Game') + '.Clock(Period).Time');
+  if (isTrue(WS.state[k.upTo('Timeout') + '.Running'])) {
+    return sbToLongTime(clockPath, WS.state[clockPath]);
+  } else {
+    return sbToLongTime(clockPath, v);
+  }
+}
