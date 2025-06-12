@@ -721,6 +721,12 @@ var WS = {
               paren.prepend(newElem);
             }
             WS.AutoRegister(newElem);
+            if (elem.prop('tagName') === 'OPTION') {
+              const cached = WS._selectCache.get(paren[0]);
+              if (cached) {
+                cached.callback(WS._enrichProp(cached.path), WS.state[cached.path], paren);
+              }
+            }
             if (options.onInsert) {
               options.onInsert(WS._enrichContext(newElem), WS._elementValue(newElem), newElem);
             }
