@@ -54,6 +54,7 @@ public class OfficialImpl extends ScoreBoardEventProviderImpl<Official> implemen
         if (prop == ROLE && value != null) {
             String role = (String) value;
             if (ROLE_HR.equals(role)) { game.set(Game.HEAD_REF, this); }
+            if (ROLE_HNSO.equals(role)) { game.set(Game.HEAD_NSO, this); }
             if (ROLE_PLT.equals(role) || ROLE_LT.equals(role) || ROLE_SK.equals(role) || ROLE_JR.equals(role)) {
                 for (Official other : game.getAll(ownType)) {
                     if (other != this && role.equals(other.get(ROLE))) {
