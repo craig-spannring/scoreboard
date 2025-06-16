@@ -31,6 +31,17 @@ import io.prometheus.client.filter.MetricsFilter;
 import io.prometheus.client.hotspot.DefaultExports;
 
 public class JettyServletScoreBoardController {
+    /**
+     * Create the Jetty web server.
+     * 
+     * @param sb           @todo document this
+     * @param jsm          @todo document this 
+     * @param host         IP address or hostname for server to listen 
+     *                     on.  Set to null or 0.0.0.0 to listen on all 
+     *                     network interfaces.  
+     * @param port         Port number on which server should listen.
+     * @param useMetrics   Collect certain metrics (e.g. active connections)
+     */
     public JettyServletScoreBoardController(ScoreBoard sb, JSONStateManager jsm, String host, int port,
                                             boolean useMetrics) {
         scoreBoard = sb;
