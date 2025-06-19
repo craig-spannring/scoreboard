@@ -306,5 +306,5 @@ function opToCurentJam(k, v) {
 }
 
 function opAddTimeout(k, v, elem) {
-  WS.Set(k.upto('Game') + '.Period(' + elem.closest('tr').children('.Period').children('select').val() + ').InsertTimeout', true);
+  WS.Set(k.upTo('Game') + '.Period(' + elem.closest('tr').children('.Period').children('select').val() + ').InsertTimeout', true);
 }
