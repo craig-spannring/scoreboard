@@ -706,7 +706,7 @@ if("undefined"==typeof jQuery)throw new Error("Bootstrap's JavaScript requires j
           <div class="nav-container">
             <div class="nav-inner" id="scroll-spy" style="width: min-content; overflow: auto; top: 60px; bottom: 0; padding 10px 0 10px 0;">
               <span class="toc">Table of contents</span>
-              <p>This document is a snapshot of the <a href="https://github.com/rollerderby/scoreboard/wiki">CRG Wiki</a> bundled with the v2025.5 release of CRG. If you have internet access it is recommended that you refer to the online version of the Wiki as it may contain relevant updates.</p>
+              <p>This document is a snapshot of the <a href="https://github.com/rollerderby/scoreboard/wiki">CRG Wiki</a> bundled with the v2025.6 release of CRG. If you have internet access it is recommended that you refer to the online version of the Wiki as it may contain relevant updates.</p>
 <h3 id="howtos">Howtos</h3>
 <ul class="nav"><li><strong><a href="#Installing-the-Scoreboard-Software">Installing the Scoreboard Software</a></strong><ul class="nav"><li><span>Instructions for getting the software installed and running on a standalone computer to provide a functioning scoreboard.</span></li></ul></li><li><strong><a href="#Quick-Start-Guide">Quick Start Guide</a></strong><ul class="nav"><li><span>Basic information to run a game with only what is mandatory for a regulation game. See the pages below for the full feature set.</span></li></ul></li><li><strong><a href="#Preparing-a-Game">Preparing a Game</a></strong></li><li><strong><a href="#Scoreboard-Operation">Scoreboard Operation</a></strong></li><li><strong><a href="#Configuring-Hotkeys">Configuring Hotkeys</a></strong></li><li><strong><a href="#Using-the-Scoreboard-on-a-Network">Using the Scoreboard on a Network</a></strong></li><li><strong><a href="#Penalty-Tracking">Penalty Tracking</a></strong></li><li><strong><a href="#Lineup-Tracking">Lineup Tracking</a></strong></li><li><span>The </span><strong>Penalty Lineup Tracking</strong> interface combines the PT and LT inputs for one team on a single screen. See those pages for info how to operate it.</li><li><strong><a href="#Penalty-Box-Timing">Penalty Box Timing</a></strong></li></ul><h3 id="tips-tricks">Tips &amp; Tricks</h3>
 <ul class="nav"><li><strong><a href="#Scoreboard-Best-Practices">Scoreboard Best Practices</a></strong></li><li><strong><a href="#Graphics">Graphics</a></strong><ul class="nav"><li><span>Information on graphics for use with CRG, such as team logos and sponsor banners.</span></li></ul></li><li><strong><a href="#External-Links">External Links</a></strong><ul class="nav"><li><span>Links to other sites with information about CRG Scoreboard.</span></li></ul></li></ul><h3 id="details-about-screens-tabs">Details about Screens / Tabs</h3>
@@ -1468,6 +1468,7 @@ user before changing hotkeys. It is impolite and confusing to redefine the hotke
 </li>
 </ul>
 <p class="page" id="Graphics"></p><h1>Graphics</h1>
+<p>For details on importing graphics into CRG, see <a href="#Files">Files</a>. </p>
 <p><strong>Note:</strong> For best compatibility use PNG or JPG images.</p>
 <h1 id="full-screen-images">Full-Screen Images</h1>
 <p>Full-screen images should be the same resolution as the projector for best quality. Other sizes will be scaled according to your settings.</p>
@@ -2290,7 +2291,7 @@ The editor for stored teams will always be a screen with a single team while the
 <p class="page" id="Files"></p><h1>Files</h1>
 <p>The Files screen allows you to upload and download files used in the scoreboard.</p>
 <p>The (sub)tabs contain files of the respective types, seperated by use case. If you want to copy or delete them in bulk you will find them in subfolders of the &quot;html&quot; folder in your CRG install. (The names of the subfolders correspond to the headers on the screen.)</p>
-<p>See <a href="#Graphics">Graphics</a> for info on resultions etc.</p>
+<p>See <a href="#Graphics">Graphics</a> for info on resolutions, formats, etc.</p>
 <p class="page" id="Scoreboard-Video-Overlays"></p><h1>Scoreboard Video Overlays</h1>
 <p>The scoreboard features a video overlay that can be used during event livestreams, for example on Twitch or YouTube.</p>
 <p><img src="https://github.com/rollerderby/scoreboard/assets/87659206/7e593cd0-d3f2-4666-ae69-dc47d7e5e47c" /></p>
@@ -2319,8 +2320,17 @@ In the Derby Scoreboard main screen, there will be a network pane on the right s
 <hr>
 <p>This page provides suggestions and notes for scoreboard developers. First, familiarize yourself with our <a href="https://github.com/rollerderby/scoreboard/blob/dev/CONTRIBUTING.md">contribution guidelines</a>. (link will not work until we publish the draft)</p>
 <h2 id="development-environment">Development environment</h2>
-<p>(recommended environment)</p>
-<p>(alternatives)</p>
+<h3 id="recommended-environment">Recommended Environment</h3>
+<p>(TBD) </p>
+<h3 id="alternatives">Alternatives</h3>
+<ul>
+<li>VS Code with suitable extensions.  The following two extensions are a good starting point.<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack">Extension Pack for Java</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=nickheap.vscode-ant">Ant Target Runner</a></li>
+</ul>
+</li>
+<li>Your favorite Java IDE.</li>
+</ul>
 <h2 id="understanding-the-source">Understanding the source</h2>
 <h2 id="frontend-development">Frontend development</h2>
 <p>The <a href="#Custom-Screen-Creation-Tutorial">Custom Screen Creation Tutorial</a> provides a good introduction to how the scoreboard frontend works in version 2025.x and after.</p>
@@ -2333,8 +2343,11 @@ In the Derby Scoreboard main screen, there will be a network pane on the right s
 <li>ant</li>
 <li>openjdk-8-jdk (or any higher version)</li>
 </ul>
-<p>Clone or download the sourcecode and change into the directory containing the source. To build CRG simply run <code>ant</code>. This will also run the bundled tests; if you want to skip those you can run <code>ant compile</code> instead.
-If you want to create a zip archive that you can install on other computers, run <code>ant zip</code> instead. The archive will be placed in the folder <code>release</code>.</p>
+<p>Clone or download the sourcecode and change into the directory containing the source. To build CRG simply run:</p>
+<pre class="hljs"><span class="hljs-attribute">ant</span></pre><p>This will also run the bundled tests; if you want to skip those you can run </p>
+<pre class="hljs"><span class="hljs-keyword">ant</span> <span class="hljs-keyword">compile</span></pre><p>instead.
+If you want to create a zip archive that you can install on other computers, run </p>
+<pre class="hljs"><span class="hljs-attribute">ant zip</span></pre><p>instead. The archive will be placed in the folder <code>release</code>.</p>
 <p class="page" id="Custom-Screen-Creation-Tutorial"></p><h1>Custom Screen Creation Tutorial</h1>
 <hr>
 <p><strong>Note on existing custom screens:</strong> This page describes how to devolop custom screens in CRG 2025, which differs significantly from how this was done in earler versions of CRG. Most custom screens developed for these earlier versions should still work, though you may have to copy (parts of) some js files from CRG 2023 to your custom screen, if you use functions from those. The most likely candidates being <code>javascript/utils.js</code> or <code>json/WSutils.js</code>.</p>
