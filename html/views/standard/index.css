@@ -27,6 +27,8 @@ body.box_flat .Box.FlatDark, .Team>.JamScore.NoInitial:not(.Overtime) { color: #
   0% { color: #FF0000; } 50% { color: #FFFFFF; } 100% { color: #FF0000; } 
 } 
 
+body.HideLineups .Team>.Jammer.ShowInLineup:not(.HasClock)>.Name, body.HideLineups:not(.PenaltyClocks) .Team>.Jammer.ShowInLineup>.Name { visibility: hidden; }
+
 .Dot { border-radius: 100%; background: #000000; } 
 .Dot.Current { background: #000000; opacity: 0; animation: DotActive 0.75s infinite steps(6); } 
 .Dot.Used { opacity: 0; } 

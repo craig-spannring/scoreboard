@@ -7,7 +7,7 @@
   </head>
   <body
     sbPrefix="&: ScoreBoard.Settings.Setting(ScoreBoard.View : )"
-    sbClass="box_flat: &_BoxStyle: dspIsFlat | bright: &_BoxStyle: dspIsBright | PenaltyClocks: &_HidePenaltyClocks: !"
+    sbClass="box_flat: &_BoxStyle: dspIsFlat | bright: &_BoxStyle: dspIsBright | PenaltyClocks: &_HidePenaltyClocks: ! | HideLineups: ScoreBoard.Settings.Setting(ScoreBoard.HideLineups)"
   >
     <div class="DisplayPane" id="image">
       <img class="object" sbAttr="src: &_Image" sbCss="object-fit: &_ImageScaling" />
@@ -21,7 +21,6 @@
       class="DisplayPane"
       id="scoreboard"
       sbContext="ScoreBoard.CurrentGame"
-      class="JamScore"
       sbCss="left: &_SidePadding: dspToLeftMargin | width: &_SidePadding: dspToWidth"
     >
       <div
@@ -73,7 +72,7 @@
           <span class="Name AutoFit" sbAutoFitOn="PenaltyTime, &_HidePenaltyClocks" sbDisplay="Name, ^DisplayLead: dspToJammerName"></span>
           <span class="PenaltyTime Box Red AutoFit sbClock" sbDisplay="PenaltyTime: sbToSeconds"></span>
         </div>
-        <div class="ShowInLineup ShowInTimeout Clock Jammer" sbContext="Position(Jammer)" sbClass="HasClock: PenaltyTime: > 0">
+        <div class="ShowInLineup ShowInTimeout ShowInSecondLineup Clock Jammer" sbContext="Position(Jammer)" sbClass="HasClock: PenaltyTime: > 0">
           <span class="Name AutoFit" sbAutoFitOn="PenaltyTime, &_HidePenaltyClocks" sbDisplay="Name"></span>
           <span class="PenaltyTime Box Red AutoFit sbClock" sbDisplay="PenaltyTime: sbToSeconds"></span>
         </div>
