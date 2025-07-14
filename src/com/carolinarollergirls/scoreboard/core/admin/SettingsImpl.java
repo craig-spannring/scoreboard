@@ -52,6 +52,7 @@ public class SettingsImpl extends ScoreBoardEventProviderImpl<Settings> implemen
         set("ScoreBoard.Operator_Default.ScoreAdjustments", "false");
         set(ScoreBoard.SETTING_USE_LT, "false");
         set(ScoreBoard.SETTING_USE_PBT, "false");
+        set(ScoreBoard.SETTING_HIDE_LINEUPS, "false");
         set(ScoreBoard.SETTING_STATSBOOK_INPUT, "");
         set(ScoreBoard.SETTING_AUTO_START, "");
         set(ScoreBoard.SETTING_AUTO_START_BUFFER, "0:02");

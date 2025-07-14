@@ -84,7 +84,9 @@ div.AnimatedPanel.AnimationDelay { transition: transform 1s ease-in-out .3s; }
 .TeamBox.ShowNames .JammerBox .Number, 
 .TeamBox:not(.ShowNames) .JammerBox .Name,
 .TeamBox:not(.PenaltyClocks) .JammerBox .PenaltyClock,
-.TeamBox .JammerBox>:not(.HasClock)>.PenaltyClock { display: none; } 
+.TeamBox .JammerBox>:not(.HasClock)>.PenaltyClock  { display: none; }
+
+.TeamBox.HideEarlyLineups:not(.InJam) .JammerBox>:not(.HasClock)>* { visibility: hidden; }
  
 
 /*************
