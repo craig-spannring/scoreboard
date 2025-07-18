@@ -151,6 +151,7 @@ public class ClockImpl extends ScoreBoardEventProviderImpl<Clock> implements Clo
     public void restoreSnapshot(ClockSnapshot s) {
         synchronized (coreLock) {
             if (s.getId() != getId()) { return; }
+            setName(s.getName());
             setNumber(s.getNumber());
             stop();
             set(TIME, isCountDirectionDown() ? getMaximumTime() - s.getTime() : s.getTime(), Flag.SPECIAL_CASE);
@@ -343,6 +344,7 @@ public class ClockImpl extends ScoreBoardEventProviderImpl<Clock> implements Clo
     public static class ClockSnapshotImpl implements ClockSnapshot {
         private ClockSnapshotImpl(Clock clock) {
             id = clock.getId();
+            name = clock.getName();
             number = clock.getNumber();
             time = clock.getTimeElapsed();
             isRunning = clock.isRunning();
@@ -351,6 +353,10 @@ public class ClockImpl extends ScoreBoardEventProviderImpl<Clock> implements Clo
         @Override
         public String getId() {
             return id;
+        }
+        @Override
+        public String getName() {
+            return name;
         }
         @Override
         public int getNumber() {
@@ -366,6 +372,7 @@ public class ClockImpl extends ScoreBoardEventProviderImpl<Clock> implements Clo
         }
 
         protected String id;
+        protected String name;
         protected int number;
         protected long time;
         protected boolean isRunning;

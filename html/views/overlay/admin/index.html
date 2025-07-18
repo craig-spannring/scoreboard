@@ -15,8 +15,7 @@
         <h2>Elements</h2>
         <button data-key="C" sbToggle="$.Clock" class="ToggleSwitch">Clock [C]</button>
         <button data-key="S" sbToggle="$.Score" class="ToggleSwitch">Score [S]</button>
-        <button data-key="J" sbToggle="$.ShowJammers" sbClass="disabled: l,$.ShowLineups: ovaLineups" class="ToggleSwitch">
-          Show Jammers [J]</button
+        <button data-key="J" sbToggle="$.ShowJammers" sbClass="disabled: l,$.ShowLineups: ovaLineups" class="ToggleSwitch">Show Jammers [J]</button
         ><br />
         <button data-key="L" sbToggle="$.ShowLineups" sbClass="disabled: l: !" class="ToggleSwitch">Full Lineups [L]</button><br />
         <button data-key="N" sbToggle="$.ShowNames" sbClass="disabled: l,$.ShowLineups,$.ShowJammers: ovaNobody" class="ToggleSwitch">
@@ -72,6 +71,16 @@
           </div>
         </div>
       </div>
+      <div id="TeamOptions" class="Panel" sbContext="ScoreBoard.CurrentGame">
+        <h2>Team Display</h2>
+        <div sbForeach="Team: 1,2: only">
+          <input sbControl="AlternateName(overlay),Name:: sbToNullIfEmpty" type="text" />
+          <input sbControl="Color(overlay.fg): ovaDefaultFgIfNull" type="color" sbClass="Cleared: Color(overlay.fg): ==null" />
+          <button class="ClearPrev" sbSet="Color(overlay.fg): null">X</button>
+          <input sbControl="Color(overlay.bg): ovaDefaultBgIfNull" type="color" sbClass="Cleared: Color(overlay.bg): ==null" />
+          <button class="ClearPrev" sbSet="Color(overlay.bg): null">X</button>
+        </div>
+      </div>
       <div id="Scaling" class="Panel">
         <h2>Scaling</h2>
         <input sbControl="$.Scaling" type="range" min="50" max="200" /><br />
@@ -84,15 +93,12 @@
           <option value="#00ff00">Green</option>
         </select>
       </div>
-      <div id="TeamOptions" class="Panel" sbContext="ScoreBoard.CurrentGame">
-        <h2>Team Display</h2>
-        <div sbForeach="Team: 1,2: only">
-          <input sbControl="AlternateName(overlay),Name:: sbToNullIfEmpty" type="text" />
-          <input sbControl="Color(overlay.fg): ovaDefaultFgIfNull" type="color" sbClass="Cleared: Color(overlay.fg): ==null" />
-          <button class="ClearPrev" sbSet="Color(overlay.fg): null">X</button>
-          <input sbControl="Color(overlay.bg): ovaDefaultBgIfNull" type="color" sbClass="Cleared: Color(overlay.bg): ==null" />
-          <button class="ClearPrev" sbSet="Color(overlay.bg): null">X</button>
-        </div>
+      <div id="PostTimeoutClock" class="Panel">
+        <h2>Clock After Timeout</h2>
+        <select sbControl="$.ClockAfterTimeout">
+          <option value="Lineup">Lineup</option>
+          <option value="Timeout">Timeout</option>
+        </select>
       </div>
       <div id="PreviewSize" class="Panel">
         <h2>Preview Size</h2>

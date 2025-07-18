@@ -41,6 +41,8 @@ public interface Timeout extends ScoreBoardEventProvider {
     public static final Command DELETE = new Command("Delete", props);
     public static final Command INSERT_AFTER = new Command("InsertAfter", props);
 
+    public static final String OR_AS_TO_TEXT = "Taken as Team Timeout";
+
     public enum Owners implements TimeoutOwner {
         NONE(""),
         OTO("O");
