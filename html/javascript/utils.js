@@ -16,28 +16,40 @@ function sbCloseDialogIfNull(k, v, elem) {
   }
 }
 
-function sbClockSelect(k) {
-  var jam = isTrue(WS.state[k.upTo('Game') + '.InJam']);
-  var timeout = isTrue(WS.state[k.upTo('Game') + '.Clock(Timeout).Running']);
-  var lineup = isTrue(WS.state[k.upTo('Game') + '.Clock(Lineup).Running']);
-  var secondLineup = lineup && timeout;
-  var intermission = isTrue(WS.state[k.upTo('Game') + '.Clock(Intermission).Running']);
+function _sbClockSelect(game, setting) {
+  var jam = isTrue(WS.state[game + '.InJam']);
+  var timeout = isTrue(WS.state[game + '.Clock(Timeout).Running']);
+  var lineup = isTrue(WS.state[game + '.Clock(Lineup).Running']);
+  var postTimeout = lineup && timeout;
+  var postTimeoutClock = WS.state['ScoreBoard.Settings.Setting(' + setting + ')'];
+  var intermission = isTrue(WS.state[game + '.Clock(Intermission).Running']);
+  var final = isTrue(WS.state[game + '.OfficialScore']);
+  var clockDuringFinal = isTrue(WS.state[game + '.ClockDuringFinalScore']);
 
   var clock = 'NoClock';
+  var betweenJams = false;
   if (jam) {
     clock = 'Jam';
-  } else if (secondLineup) {
-    clock = "SecondLineup"
+  } else if (postTimeout) {
+    clock = "PostTimeout" + postTimeoutClock;
+    betweenJams = true;
   } else if (lineup) {
     clock = 'Lineup';
+    betweenJams = true;
   } else if (timeout) {
     clock = 'Timeout';
+    betweenJams = true;
   } else if (intermission) {
-    clock = 'Intermission';
+    if (final && !clockDuringFinal) {
+      clock = 'Final';
+    } else {
+      clock = 'Intermission';
+    }
   }
 
   $('.Clock,.SlideDown').removeClass('Show');
   $('.ShowIn' + clock).addClass('Show');
+  if (betweenJams) { $('.ShowInBetweenJams').addClass('Show'); }
 }
 
 function sbSetActiveTimeout(k) {

@@ -65,7 +65,14 @@
     </div>
     <div class="sbGroup View DisplayOptions" sbPrefix="$:ScoreBoard.Settings.Setting(ScoreBoard.View:)">
       <span></span>
-      <span></span>
+      <span>
+        <label>Clock After Timeout: </label>
+        <select sbControl="$_ClockAfterTimeout" ApplyPreview="ClockAfterTimeout">
+          <option value="Both">Both</option>
+          <option value="Timeout">Timeout</option>
+          <option value="Lineup">Lineup</option>
+        </select>
+      </span>
       <span>
         <label>Current View: </label>
         <select sbControl="$_CurrentView" ApplyPreview="CurrentView">

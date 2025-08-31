@@ -37,9 +37,7 @@
         >
           Trip Pts -1
         </button>
-        <button class="sbKeyControl" sbAttr="id:-: 'Team[Team]RemoveTrip'" sbProp="disabled: NoInitial" sbSet="RemoveTrip">
-          Remove Trip
-        </button>
+        <button class="sbKeyControl" sbAttr="id:-: 'Team[Team]RemoveTrip'" sbProp="disabled: NoInitial" sbSet="RemoveTrip">Remove Trip</button>
       </div>
       <div class="sbStack">
         <span>Jam Pts: <span class="sbImportant" sbDisplay="JamScore"></span></span>
@@ -61,30 +59,44 @@
     </div>
   </div>
   <div class="sbGroup sbShowOnOperator Timeouts">
-    <button
-      class="sbKeyControl"
-      sbAttr="id:-:'Team[Team]Timeout'"
-      sbClass="sbActive: Id,^TimeoutOwner, ^OfficialReview: sbIsToThisTeam"
-      sbSet="Timeout"
-    >
-      Team TO
-    </button>
-    <span class="sbVeryImportant" sbDisplay="Timeouts" sbCall="opOpenTimeoutDialog"></span>
-    <button
-      class="sbKeyControl"
-      sbAttr="id:-:'Team[Team]OfficialReview'"
-      sbClass="sbActive: Id,^TimeoutOwner, ^OfficialReview: sbIsOrThisTeam"
-      sbSet="OfficialReview"
-    >
-      Off Review
-    </button>
-    <span class="sbVeryImportant" sbDisplay="OfficialReviews" sbCall="opOpenTimeoutDialog"></span>
-    <button class="sbKeyControl" sbAttr="id:-:'Team[Team]RetainedOfficialReview'" sbToggle="RetainedOfficialReview">Retained</button>
+    <span>
+      <button
+        class="sbKeyControl ToButton"
+        sbAttr="id:-:'Team[Team]Timeout'"
+        sbClass="sbActive: Id,^TimeoutOwner, ^OfficialReview: sbIsToThisTeam"
+        sbSet="Timeout"
+      >
+        Team TO
+      </button>
+      <span class="sbVeryImportant ToNumber" sbDisplay="Timeouts" sbCall="opOpenTimeoutDialog"></span>
+    </span>
+    <span class="OR">
+      <span class="sbStack ToButton">
+        <button
+          class="sbKeyControl"
+          sbAttr="id:-:'Team[Team]OfficialReview'"
+          sbClass="sbActive: Id,^TimeoutOwner, ^OfficialReview: sbIsOrThisTeam"
+          sbSet="OfficialReview"
+        >
+          Off Review
+        </button>
+        <span>
+          <button
+            class="sbKeyControl"
+            sbAttr="id:-:'Team[Team]OrAsTo'"
+            sbClass="sbHide: Id,^TimeoutOwner, ^OfficialReview: sbIsNotOrThisTeam"
+            sbToggle="^ReviewIsTo"
+          >
+            As TO
+          </button>
+          <button class="sbKeyControl" sbAttr="id:-:'Team[Team]RetainedOfficialReview'" sbToggle="RetainedOfficialReview">Retained</button>
+        </span>
+      </span>
+      <span class="sbVeryImportant ToNumber OR" sbDisplay="OfficialReviews" sbCall="opOpenTimeoutDialog"></span>
+    </span>
     <div class="OfficialTimeout">
       <div>
-        <button class="sbKeyControl" id="OfficialTimeout" sbClass="sbActive: ^TimeoutOwner: ==='O'" sbSet="^OfficialTimeout">
-          Official Timeout
-        </button>
+        <button class="sbKeyControl" id="OfficialTimeout" sbClass="sbActive: ^TimeoutOwner: ==='O'" sbSet="^OfficialTimeout">Official Timeout</button>
       </div>
     </div>
   </div>
@@ -105,9 +117,7 @@
     <span
       >Jammer:
       <span sbButtonGroup>
-        <button class="sbKeyControl" sbAttr="Id:-: 'Team[Team]JammerNone'" sbClass="sbActive: p.Skater: sbIsEmpty" sbSet="p.Skater: ''">
-          ?
-        </button>
+        <button class="sbKeyControl" sbAttr="Id:-: 'Team[Team]JammerNone'" sbClass="sbActive: p.Skater: sbIsEmpty" sbSet="p.Skater: ''">?</button>
         <button
           class="sbKeyControl"
           sbForeach="Skater:: rosterNumber: resort=RosterNumber,onInsert=skiSetupKey"
@@ -131,9 +141,7 @@
     <span
       >Piv/4th Bl:
       <span sbButtonGroup>
-        <button class="sbKeyControl" sbAttr="Id:-: 'Team[Team]PivotNone'" sbClass="sbActive: p.Skater: sbIsEmpty" sbSet="p.Skater: ''">
-          ?
-        </button>
+        <button class="sbKeyControl" sbAttr="Id:-: 'Team[Team]PivotNone'" sbClass="sbActive: p.Skater: sbIsEmpty" sbSet="p.Skater: ''">?</button>
         <button
           class="sbKeyControl"
           sbForeach="Skater:: rosterNumber: resort=RosterNumber,onInsert=skiSetupKey"

@@ -5,11 +5,13 @@ WS.Register(
     'ScoreBoard.CurrentGame.TimeoutOwner',
     'ScoreBoard.CurrentGame.OfficialReview',
     'ScoreBoard.CurrentGame.Team(*).Timeouts',
+    'ScoreBoard.CurrentGame.ClockDuringFinalScore'
   ],
   sbSetActiveTimeout
 );
 
-WS.Register(['ScoreBoard.CurrentGame.Clock(*).Running', 'ScoreBoard.CurrentGame.InJam'], sbClockSelect);
+WS.Register(['ScoreBoard.Settings.Setting(Overlay.Interactive.ClockAfterTimeout)', 'ScoreBoard.CurrentGame.Clock(*).Running', 'ScoreBoard.CurrentGame.InJam'],
+  function (k) { _sbClockSelect('ScoreBoard.CurrentGame', 'Overlay.Interactive.ClockAfterTimeout') });
 
 WS.Register('ScoreBoard.CurrentGame.Rule(Penalties.NumberToFoulout)');
 
@@ -87,10 +89,10 @@ function ovlToIndicator(k, v) {
   return isTrue(WS.state[prefix + '.StarPass'])
     ? 'SP'
     : isTrue(WS.state[prefix + '.Lost'])
-    ? ''
-    : isTrue(WS.state[prefix + '.Lead'])
-    ? '★'
-    : '';
+      ? ''
+      : isTrue(WS.state[prefix + '.Lead'])
+        ? '★'
+        : '';
 }
 
 function ovlIsJamming(k, v, elem) {
