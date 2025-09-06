@@ -33,7 +33,7 @@
       <div class="sbGroup" sbForeach="BoxTrip:: time" sbAttr="time: Clock.Time" sbPrefix="b: [*]">
         <span class="col1 sbStack">
           <button sbSet="Delete">Cancel</button>
-          <span>Remaining: <span class="sbImportant" sbDisplay="Clock.Time: sbToSeconds"></span></span>
+          <span>Remaining: <span class="sbImportant sbClock" sbDisplay="Clock.Time: sbToSeconds"></span></span>
         </span>
         <span class="perTeam" sbContext="^" sbForeach="Team: 1,2: only">
           <button
@@ -89,9 +89,7 @@
           </span>
         </div>
         <div class="sbGroup" sbClass="sbHide: Skater: sbIsEmpty">
-          <button class="StartButton" sbClass="sbHide: PenaltyBox" sbSet="StartBoxClock" sbCall="closeDialogIfSkater">
-            Skater Sat Down
-          </button>
+          <button class="StartButton" sbClass="sbHide: PenaltyBox" sbSet="StartBoxClock" sbCall="closeDialogIfSkater">Skater Sat Down</button>
           <button
             sbClass="sbHide: PenaltyBox: ! | sbClickMe: PenaltyTime: <=0"
             sbSet="PenaltyBox: false"

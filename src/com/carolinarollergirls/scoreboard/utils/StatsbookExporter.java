@@ -388,7 +388,8 @@ public class StatsbookExporter extends Thread {
         for (Penalty p : s.getAll(Skater.PENALTY)) {
             int num = p.getNumber();
             int period = p.getPeriodNumber();
-            if (num > 9 || period < 1 || period > 2) { continue; }
+            if (num > 9 || period < 1 || period > 2) { continue; }            // out of range covered in statsbook
+            if (num == 0 && "RE".equals(p.get(Penalty.CODE))) { continue; } // removal is not part of statsbook
             int col = num == 0 ? 10 : num;
             if (period == 2) { col += 28; }
             if (Team.ID_2.equals(s.getTeam().getProviderId())) { col += 15; }
@@ -688,7 +689,8 @@ public class StatsbookExporter extends Thread {
         }
         setCell(row, 1, j.getDuration() / 1000);
         for (Penalty pen : j.getAll(Jam.PENALTY)) {
-            if (Skater.FO_EXP_ID.equals(pen.getProviderId()) && !"FO".equals(pen.getCode())) { // expulsion
+            if (Skater.FO_EXP_ID.equals(pen.getProviderId()) && !"FO".equals(pen.getCode()) &&
+                !"RE".equals(pen.getCode())) { // expulsion
                 events.add("EXP");
                 eventDetails.add(pen.getParent().getParent().get(Team.UNIFORM_COLOR) + " " +
                                  pen.getParent().get(Skater.ROSTER_NUMBER));

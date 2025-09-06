@@ -84,7 +84,9 @@ div.AnimatedPanel.AnimationDelay { transition: transform 1s ease-in-out .3s; }
 .TeamBox.ShowNames .JammerBox .Number, 
 .TeamBox:not(.ShowNames) .JammerBox .Name,
 .TeamBox:not(.PenaltyClocks) .JammerBox .PenaltyClock,
-.TeamBox .JammerBox>:not(.HasClock)>.PenaltyClock { display: none; } 
+.TeamBox .JammerBox>:not(.HasClock)>.PenaltyClock  { display: none; }
+
+.TeamBox.HideEarlyLineups:not(.InJam) .JammerBox>:not(.HasClock)>* { visibility: hidden; }
  
 
 /*************
@@ -94,8 +96,7 @@ div.AnimatedPanel.AnimationDelay { transition: transform 1s ease-in-out .3s; }
 
 .SlideDown { transition: max-height 1s ease; width: 100%; overflow: hidden; padding: 0;  max-height: 0; } 
 
-.ClockBarTop { padding: 0; font-size: 1.4em; }
-.ClockBarTop.SlideDown.Show { width: 100%; padding: 2% 5%; max-height: 2em; } 
+.ClockBarTop { padding: 0; font-size: 1.4em; width: 100%; padding: 2% 5%; max-height: 2em; } 
 .ClockNames { width: 100%; font-size: 1.7em; } 
 .ClockNames > .Box { float: left; text-align: center; } 
 .ClockBox .Name { width: 49%; } 
@@ -106,8 +107,10 @@ div.AnimatedPanel.AnimationDelay { transition: transform 1s ease-in-out .3s; }
 .ClockBox .ClockDescription.Show { padding: 2px 0; } 
 
 .ClockBarBottom { font-size: 1.7em; } 
+.ClockBarBottom.SlideDown.Show { max-height: 2em; }
 .BottomRow { border-radius: 0 0 10px 10px; width: 100%; padding: 2% 5%; }
-.ClockBox .Time { width: 49%; } 
+.ClockBox .Time.TextLeft { width: 55%; } 
+.ClockBox .Time.TextRight { width: 45%; } 
 .ClockBox .Time.ShowInIntermission { width: 100%; } 
 .ClockBox .Time.Hidden { display: none; }
 

@@ -8,7 +8,7 @@
 #Igrf div.Files .ui-button { margin: 1px 5px; } 
 #Igrf div.Files .Warning { color: red; }
 
-#Igrf table.Summary { border: 1px solid black; border-collapse: collapse; background-color: white; font-weight: bold; margin: auto; }
+#Igrf table.Summary { border: 1px solid black; border-collapse: collapse; background-color: white; font-weight: 600; margin: auto; }
 #Igrf table.Summary td { border: 1px solid black; border-collapse: collapse; width: 80px; }
 #Igrf table.Summary .Head, #Igrf table.Summary .Total { background-color: #ffd0ff; }
 #Igrf table.Summary .Label { background-color: #ffe8ff; }

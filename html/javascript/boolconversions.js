@@ -51,6 +51,14 @@ function sbIsOrThisTeam(k, v) {
   return v === WS.state[prefix + '.TimeoutOwner'] && isTrue(WS.state[prefix + '.OfficialReview']);
 }
 
+function sbIsNotToThisTeam(k, v) {
+  return !sbIsToThisTeam(k, v);
+}
+
+function sbIsNotOrThisTeam(k, v) {
+  return !sbIsOrThisTeam(k, v);
+}
+
 function sbIsOnTrackRole(k, v) {
   return v === 'Jammer' || v === 'Pivot' || v === 'Blocker';
 }

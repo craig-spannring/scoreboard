@@ -146,6 +146,8 @@ function pltToIneligibleReason(k, v) {
     return 'an injury calloff (or similar)';
   } else if (v === 'FO') {
     return 'a foulout';
+  } else if (v === 'RE') {
+    return 'removal for safety concerns';
   } else {
     return 'an expulsion';
   }

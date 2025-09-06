@@ -166,6 +166,7 @@
           <span class="Role">
             <select class="Role" sbCall="igrfToggleInput">
               <option value="">None Selected</option>
+              <option value="Head Non-Skating Official">Head Non-Skating Official</option>
               <option value="Penalty Lineup Tracker">Penalty Lineup Tracker</option>
               <option value="Penalty Tracker">Penalty Tracker</option>
               <option value="Penalty Wrangler">Penalty Wrangler</option>
@@ -186,17 +187,18 @@
         <th><input type="text" size="30" class="League" sbOn="keyup: igrfUpdateAddButton | paste: igrfPasteOfficials" /></th>
         <th><input type="text" size="10" class="Cert" sbOn="keyup: igrfUpdateAddButton | paste: igrfPasteOfficials" /></th>
         <th></th>
-        <th rowspan="2"><button class="AddOfficial" sbCall="igrfAddOfficial">Add</button></th>
+        <th rowspan="2"><button disabled class="AddOfficial ui-button-disabled ui-state-disabled" sbCall="igrfAddOfficial">Add</button></th>
       </tr>
       <tr class="AddPreparedOfficial sbSubHeader">
         <th colspan="2">
-          <select class="Prepared">
+          <select class="Prepared" sbOn="change: igrfUpdateAddButton">
             <option value="">Select Stored Official</option>
             <option
               sbContext="/ScoreBoard"
               sbForeach="PreparedOfficial::info"
               sbAttr="value: Id | info: FullInfo"
               sbDisplay="FullInfo"
+              sbCall="igrfUpdateAddButton"
             ></option>
           </select>
         </th>
@@ -209,6 +211,7 @@
           <span class="Role">
             <select class="Role" sbControl="Role: igrfFilterOtherRole: igrfOtherToEmpty">
               <option value="">None Selected</option>
+              <option value="Head Non-Skating Official">Head Non-Skating Official</option>
               <option value="Penalty Lineup Tracker">Penalty Lineup Tracker</option>
               <option value="Penalty Tracker">Penalty Tracker</option>
               <option value="Penalty Wrangler">Penalty Wrangler</option>

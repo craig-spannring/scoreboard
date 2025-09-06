@@ -77,6 +77,7 @@ public interface Clock extends ScoreBoardEventProvider {
 
     public static interface ClockSnapshot {
         public String getId();
+        public String getName();
         public int getNumber();
         public long getTime();
         public boolean isRunning();

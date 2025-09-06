@@ -13,9 +13,9 @@
           <th>Jam Number:</th>
           <td class="sbImportant" sbDisplay="PrecedingJamNumber"></td>
           <th>Period Clock:</th>
-          <td class="sbImportant" sbDisplay="PeriodClockEnd: sbToLongTime"></td>
+          <td class="sbImportant" sbDisplay="PeriodClockEnd, ^^Clock(Period).Time, Running: orToPeriodClock"></td>
           <th>Length of Review:</th>
-          <td class="sbImportant" sbAttr="Duration: Duration" sbDisplay="Duration: sbToLongTime"></td>
+          <td class="sbImportant" sbAttr="Duration: Duration" sbDisplay="Running, Duration: sbToTimeoutDuration"></td>
           <td><button sbToggle="RetainedReview">Retained</button></td>
         </tr>
         <tr>

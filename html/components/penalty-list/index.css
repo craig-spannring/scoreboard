@@ -9,7 +9,7 @@
 #PenaltyList .Trip.Done:not(.Old) { background-color: #6fdf6f; color: #000; border-color: #000; }
 #PenaltyList .Trip [warn="1"] { background-color: #ffff00; color: #000; }
 #PenaltyList .Trip [warn="2"] { background-color: #ff9010; color: #000; }
-#PenaltyList .Trip [warn="3"] { background-color: #ff2828; color: #000; }
+#PenaltyList .Trip [warn="3"] { background-color: #ff2828; color: #fff; }
 #PenaltyList .Trip:not(.Stand):not(.Done):not(.Old) [warn="3"] { background-color: #fff; color: #000; }
 
 #PenaltySelector .Codes { flex-wrap: wrap; gap: 0.5em; }

@@ -65,6 +65,10 @@ public class ScoreBoardClock extends TimerTask {
         }
     }
 
+    public boolean isRunning() {
+        synchronized (coreLock) { return stopCounter == 0; }
+    }
+
     public void registerClient(ScoreBoardClockClient client) {
         synchronized (coreLock) { clients.add(client); }
     }

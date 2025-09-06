@@ -14,12 +14,8 @@
       >
         <span sbDisplay="^AlternateName(box),^UniformColor,^Name"></span> <span sbDisplay="RosterNumber"></span>
       </span>
-      <span
-        sbClass="sbInvisible: IsCurrent: !"
-        class="sbVeryImportant Instruction"
-        sbDisplay="Clock.Time, EndFielding: penToInstruction"
-      ></span>
-      <span sbClass="sbInvisible: IsCurrent: !" class="sbVeryVeryImportant" sbDisplay="Clock.Time: sbToSeconds"></span>
+      <span sbClass="sbInvisible: IsCurrent: !" class="sbVeryImportant Instruction" sbDisplay="Clock.Time, EndFielding: penToInstruction"></span>
+      <span sbClass="sbInvisible: IsCurrent: !" class="sbVeryVeryImportant sbClock" sbDisplay="Clock.Time: sbToSeconds"></span>
       <span class="sbImportant" sbAttr="warn: TotalPenalties, CurrentSkater, ^^Rule(Penalties.NumberToFoulout): sbToWarnLevel">
         <span class="sbShowOnBoxView"><span sbDisplay="PenaltyCodes"></span> | </span>
         <span sbClass="sbHide: CurrentSkater: sbIsEmpty">Total: <span sbDisplay="TotalPenalties"></span></span>

@@ -41,6 +41,7 @@ public class SettingsImpl extends ScoreBoardEventProviderImpl<Settings> implemen
 
     private void setDefaults() {
         set("Overlay.Interactive.Clock", "true");
+        set("Overlay.Interactive.ClockAfterTimeout", "Lineup");
         set("Overlay.Interactive.Scaling", "100");
         set("Overlay.Interactive.Score", "true");
         set("Overlay.Interactive.ShowJammers", "true");
@@ -52,11 +53,12 @@ public class SettingsImpl extends ScoreBoardEventProviderImpl<Settings> implemen
         set("ScoreBoard.Operator_Default.ScoreAdjustments", "false");
         set(ScoreBoard.SETTING_USE_LT, "false");
         set(ScoreBoard.SETTING_USE_PBT, "false");
+        set(ScoreBoard.SETTING_HIDE_LINEUPS, "false");
         set(ScoreBoard.SETTING_STATSBOOK_INPUT, "");
         set(ScoreBoard.SETTING_AUTO_START, "");
         set(ScoreBoard.SETTING_AUTO_START_BUFFER, "0:02");
         set(ScoreBoard.SETTING_AUTO_END_JAM, "false");
-        set(ScoreBoard.SETTING_AUTO_END_TTO, "false");
+        set(ScoreBoard.SETTING_AUTO_END_TTO, "true");
         set(Clock.SETTING_SYNC, "true");
         set(Team.SETTING_DISPLAY_NAME, Team.OPTION_LEAGUE_NAME);
         set(Game.SETTING_DEFAULT_NAME_FORMAT, "%d %G %1 vs. %2 (%s: %S)");
@@ -67,6 +69,7 @@ public class SettingsImpl extends ScoreBoardEventProviderImpl<Settings> implemen
         set("ScoreBoard.Intermission.OfficialWithClock", "Final Score");
 
         setBothViews("BoxStyle", "box_flat_bright");
+        setBothViews("ClockAfterTimeout", "Both");
         setBothViews("CurrentView", "scoreboard");
         setBothViews("CustomHtml", "/customhtml/fullscreen/example.html");
         setBothViews("Image", "/images/fullscreen/test-image.png");

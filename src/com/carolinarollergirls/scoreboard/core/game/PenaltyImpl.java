@@ -78,7 +78,7 @@ public class PenaltyImpl extends NumberedScoreBoardEventProviderImpl<Penalty> im
             if (value == null) {
                 game.remove(Game.EXPULSION, getId());
                 delete(source);
-            } else if ("FO".equals(value)) {
+            } else if ("FO".equals(value) || "RE".equals(value)) {
                 game.remove(Game.EXPULSION, getId());
             } else if (Skater.FO_EXP_ID.equals(getProviderId()) && game.get(Game.EXPULSION, getId()) == null) {
                 game.add(Game.EXPULSION, new ExpulsionImpl(game, this));

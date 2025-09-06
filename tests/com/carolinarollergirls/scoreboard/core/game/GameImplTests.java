@@ -479,6 +479,7 @@ public class GameImplTests {
 
     @Test
     public void testStartJam_fromTimeout() {
+        g.set(Rule.TO_JAM, "true");
         fastForwardJams(17);
         g.timeout();
         assertFalse(pc.isRunning());
@@ -498,7 +499,7 @@ public class GameImplTests {
         g.startJam();
 
         assertEquals(Game.ACTION_START_JAM, g.snapshot.getType());
-        assertTrue(pc.isRunning());
+        assertFalse(pc.isRunning());
         assertEquals(1, pc.getNumber());
         assertTrue(jc.isRunning());
         assertTrue(jc.isTimeAtStart());

@@ -27,6 +27,8 @@ body.box_flat .Box.FlatDark, .Team>.JamScore.NoInitial:not(.Overtime) { color: #
   0% { color: #FF0000; } 50% { color: #FFFFFF; } 100% { color: #FF0000; } 
 } 
 
+body.HideLineups .Team>.Jammer.ShowInBetweenJams:not(.HasClock)>.Name, body.HideLineups:not(.PenaltyClocks) .Team>.Jammer.ShowInBetweenJams>.Name { visibility: hidden; }
+
 .Dot { border-radius: 100%; background: #000000; } 
 .Dot.Current { background: #000000; opacity: 0; animation: DotActive 0.75s infinite steps(6); } 
 .Dot.Used { opacity: 0; } 
@@ -99,7 +101,7 @@ body.box_flat .Box.FlatDark, .Team>.JamScore.NoInitial:not(.Overtime) { color: #
 .Team.Right>.Jammer>.Name { right: 0%; }
 .Team.Right>.Jammer>.PenaltyTime { right: -100%; }
 .PenaltyClocks .Team.Right>.Jammer.HasClock>.PenaltyTime { right: 70%; }
-.Team>.Jammer.ShowInLineup { height: 10%; }
+.Team>.Jammer.ShowInBetweenJams { height: 10%; }
 
 
 .Clock.Period.Large { position: absolute; top: 65%; left: -40%; right: auto; width: 40%; height: 28%;  } 

@@ -5,6 +5,7 @@
       <button sbToggle="$.Clock.Sync">Sync Clocks</button>
       <button sbToggle="$.Penalties.UseLT">CRG Tracks Lineups</button>
       <button sbToggle="$.Penalties.UsePBT">CRG Times Penalties</button>
+      <button sbToggle="$.HideLineups">Hide Lineups Before Jam Start</button>
     </div>
     <div class="sbGroup ScoreBoardOptions">
       <button class="ui-button-small" sbCall="stgOpenIntermissionDialog">Intermission Labels</button>
@@ -64,7 +65,14 @@
     </div>
     <div class="sbGroup View DisplayOptions" sbPrefix="$:ScoreBoard.Settings.Setting(ScoreBoard.View:)">
       <span></span>
-      <span></span>
+      <span>
+        <label>Clock After Timeout: </label>
+        <select sbControl="$_ClockAfterTimeout" ApplyPreview="ClockAfterTimeout">
+          <option value="Both">Both</option>
+          <option value="Timeout">Timeout</option>
+          <option value="Lineup">Lineup</option>
+        </select>
+      </span>
       <span>
         <label>Current View: </label>
         <select sbControl="$_CurrentView" ApplyPreview="CurrentView">

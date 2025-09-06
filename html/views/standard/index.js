@@ -34,7 +34,8 @@
   );
 
   // Show Clocks
-  WS.Register(['ScoreBoard.CurrentGame.Clock(*).Running', 'ScoreBoard.CurrentGame.InJam'], sbClockSelect);
+  WS.Register(['ScoreBoard.Settings.Setting(ScoreBoard.' + view + '_ClockAfterTimeout)', 'ScoreBoard.CurrentGame.Clock(*).Running', 'ScoreBoard.CurrentGame.InJam'],
+    function (k) { _sbClockSelect('ScoreBoard.CurrentGame', 'ScoreBoard.' + view + '_ClockAfterTimeout') });
 })();
 
 WS.AfterLoad(function () {

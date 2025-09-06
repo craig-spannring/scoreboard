@@ -124,6 +124,7 @@ public interface Game extends ScoreBoardEventProvider {
     public static final Value<TimeoutOwner> TIMEOUT_OWNER =
         new Value<>(TimeoutOwner.class, "TimeoutOwner", null, props);
     public static final Value<Boolean> OFFICIAL_REVIEW = new Value<>(Boolean.class, "OfficialReview", false, props);
+    public static final Value<Boolean> OR_IS_TO = new Value<>(Boolean.class, "ReviewIsTo", false, props);
     public static final Value<Boolean> NO_MORE_JAM = new Value<>(Boolean.class, "NoMoreJam", false, props);
     public static final Value<Ruleset> RULESET = new Value<>(Ruleset.class, "Ruleset", null, props);
     public static final Value<String> RULESET_NAME = new Value<>(String.class, "RulesetName", "Custom", props);
