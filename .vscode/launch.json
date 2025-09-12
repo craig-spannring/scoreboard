@@ -13,6 +13,72 @@
     },
     {
       "type": "java",
+      "name": "scoreboard --help",
+      "request": "launch",
+      "mainClass": "com.carolinarollergirls.scoreboard.Main",
+      "args": 
+      [
+         "--help"
+      ],  
+      "projectName": "crg-scoreboard"
+    },
+    {
+      "type": "java",
+      "name": "scoreboard --bogus",
+      "request": "launch",
+      "mainClass": "com.carolinarollergirls.scoreboard.Main",
+      "args": 
+      [
+         "--bogus"
+      ],  
+      "projectName": "crg-scoreboard"
+    },
+    {
+      "type": "java",
+      "name": "scoreboard --metrics",
+      "request": "launch",
+      "mainClass": "com.carolinarollergirls.scoreboard.Main",
+      "args": 
+      [
+         "--metrics"
+      ],  
+      "projectName": "crg-scoreboard"
+    },
+    {
+      "type": "java",
+      "name": "scoreboard --host=nomad.local",
+      "request": "launch",
+      "mainClass": "com.carolinarollergirls.scoreboard.Main",
+      "args": 
+      [
+         "--host=nomad.local"
+      ],  
+      "projectName": "crg-scoreboard"
+    },
+    {
+      "type": "java",
+      "name": "scoreboard --host=172.21.21.130",
+      "request": "launch",
+      "mainClass": "com.carolinarollergirls.scoreboard.Main",
+      "args": 
+      [
+         "--host=172.21.21.130"
+      ],  
+      "projectName": "crg-scoreboard"
+    },
+    {
+      "type": "java",
+      "name": "scoreboard --host=bogus",
+      "request": "launch",
+      "mainClass": "com.carolinarollergirls.scoreboard.Main",
+      "args": 
+      [
+         "--host=bogus"
+      ],  
+      "projectName": "crg-scoreboard"
+    },
+    {
+      "type": "java",
       "name": "Launch Current File",
       "request": "launch",
       "mainClass": "${file}"
