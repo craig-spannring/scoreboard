@@ -5,7 +5,7 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.NetworkInterface;
 import java.net.SocketException;
-import java.net.URL;
+import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.util.Collections;
 import java.util.Set;
@@ -34,21 +34,29 @@ public class UrlsServlet extends HttpServlet {
         return urls;
     }
 
+    private static void addURL(Set<String> urls, String host, int port) {
+        try {
+            // Try to add.  If for some reason we fail, just ignore this host.
+            urls.add((new java.net.URI("http", null, host, port, "/", null, null).toURL()).toString());
+        } catch (URISyntaxException uriEx) {
+        } catch (MalformedURLException muE) { }
+    }
+
     protected void addURLs(Set<String> urls, String host, int port) throws MalformedURLException, SocketException {
         if (null == host) {
             for (NetworkInterface iface : Collections.list(NetworkInterface.getNetworkInterfaces())) {
                 for (InetAddress addr : Collections.list(iface.getInetAddresses())) {
                     if (!addr.isLoopbackAddress()) {
-                        urls.add(new URL("http", addr.getHostAddress(), port, "/").toString());
+                        addURL(urls, addr.getHostAddress(), port);
                     }
                 }
             }
         } else {
-            urls.add(new URL("http", host, port, "/").toString());
+            addURL(urls, host, port);
             try {
                 // Get the IP address of the given host.
-                urls.add(new URL("http", InetAddress.getByName(host).getHostAddress(), port, "/").toString());
-            } catch (UnknownHostException uhE) {}
+                addURL(urls, InetAddress.getByName(host).getHostAddress(), port);
+            } catch (UnknownHostException uhE) { }
         }
     }
 
