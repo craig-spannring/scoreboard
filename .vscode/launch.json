@@ -68,12 +68,12 @@
     },
     {
       "type": "java",
-      "name": "scoreboard --host=bogus",
+      "name": "scoreboard --host=bogus.example.com",
       "request": "launch",
       "mainClass": "com.carolinarollergirls.scoreboard.Main",
       "args": 
       [
-         "--host=bogus"
+         "--host=bogus.example.com"
       ],  
       "projectName": "crg-scoreboard"
     },
