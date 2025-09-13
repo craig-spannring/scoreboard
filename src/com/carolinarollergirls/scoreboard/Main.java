@@ -138,7 +138,22 @@ public class Main extends Logger {
                 importPath = arg.split("=", 2)[1];
             } else if (arg.equals("--metrics") || arg.equals("-m")) {
                 useMetrics = true;
-            }
+            } else if (arg.equals("--help") || arg.equals("-h")) {
+                System.out.println("Options:");
+                System.out.println("  --gui, -g                  Create GUI window to show program messages.");
+                System.out.println("  --nogui, -G                (default) Do not create GUI window.");
+                System.out.println("  --port=<port>, -p=<port>   Port to listen on (default 8000)");
+                System.out.println("  --host=<host>, -h=<host>   Host to bind to (default all interfaces)");
+                System.out.println("  --import=<path>, -i=<path> Import data from non-standard location");
+                System.out.println("                             Use --import= to disable import");
+                System.out.println("  --metrics, -m              Log metrics for developers");
+                System.out.println("  --help, -h                 Show this help message");
+                System.exit(0);
+            } else {
+                System.err.println("Unknown argument: " + arg);
+                System.err.println("Use --help or -h for usage information.");
+                System.exit(1);
+            }            
         }
 
         if (gui) { createGui(); }
