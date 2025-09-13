@@ -140,8 +140,8 @@ public class Main extends Logger {
                 useMetrics = true;
             } else if (arg.equals("--help") || arg.equals("-h")) {
                 System.out.println("Options:");
-                System.out.println("  --gui, -g                  (default) Create GUI window to show program messages.");
-                System.out.println("  --nogui, -G                Do not create GUI window.");
+                System.out.println("  --gui, -g                  Create GUI window to show program messages.");
+                System.out.println("  --nogui, -G                (default) Do not create GUI window.");
                 System.out.println("  --port=<port>, -p=<port>   Port to listen on (default 8000)");
                 System.out.println("  --host=<host>, -h=<host>   Host to bind to (default all interfaces)");
                 System.out.println("  --import=<path>, -i=<path> Import data from non-standard location");
