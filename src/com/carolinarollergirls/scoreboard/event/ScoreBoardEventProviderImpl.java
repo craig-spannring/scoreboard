@@ -96,18 +96,24 @@ public abstract class ScoreBoardEventProviderImpl<C extends ScoreBoardEventProvi
         dispatch(event);
     }
 
+    /**
+     * Synchronously send events to all listeners in scoreBoardEventListeners.
+     * @param event the {@link ScoreBoardEvent} to be dispatched to the listeners.
+     */
     protected void dispatch(ScoreBoardEvent<?> event) {
-        // Synchronously send events to listeners.
         // need to copy the list as some listeners may add or remove listeners
         synchronized (scoreBoardEventListeners) {
             for (ScoreBoardListener l : new ArrayList<>(scoreBoardEventListeners)) { l.scoreBoardChange(event); }
         }
     }
 
+    /** Enter a new (possibly nested) batch. */
     protected void requestBatchStart() {
+        // Note- As far as I can tell, this doesn't affect anything except for some checks in the unitt tests.
         scoreBoardChange(new ScoreBoardEvent<>(this, BATCH_START, Boolean.TRUE, Boolean.TRUE));
     }
 
+    /** Exit a (possibly nested) batch. */
     protected void requestBatchEnd() {
         scoreBoardChange(new ScoreBoardEvent<>(this, BATCH_END, Boolean.TRUE, Boolean.TRUE));
     }
