@@ -27,12 +27,25 @@ import com.carolinarollergirls.scoreboard.event.ScoreBoardEventProvider.Source;
 import com.carolinarollergirls.scoreboard.json.ScoreBoardJSONSetter;
 import com.carolinarollergirls.scoreboard.utils.StatsbookImporter;
 
+/**
+ * Servlet to handle requests from web browser to upload a JSON or XLSX file.
+ */
 public class LoadJsonScoreBoard extends HttpServlet {
     public LoadJsonScoreBoard(ScoreBoard sb) {
         this.scoreBoard = sb;
         sbImporter = new StatsbookImporter(sb);
     }
 
+    /**
+     * Handle recieving a JSON or XLSX file from a web browser.
+     * <p> This handles one or three types of files, depending on the path. </p>
+     * <ul>
+     *  <li>/JSON       - A JSON file containing a scoreboard state (State can be 
+     * *                  a saved game, team, ruleset, of operator key bindings).</li>
+     *  <li>/xlsx       - An XLSX file containing Statsbook data (i.e. a prepared game).</li>
+     *  <li>/blank_xlsx - An XLSX file that is a blank Statsbook template.</li>
+     * </ul>
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {

@@ -29,6 +29,17 @@ import com.carolinarollergirls.scoreboard.core.interfaces.ScoreBoard;
 
 /**
  * Servlet to handle requests from web browser to upload/remove media files
+ * <p>
+ * This class has two actions that it can perform
+ * </p> 
+ * <ol>
+ *  <li> Remove files from disk. </li>
+ *  <li> Store an uploaded file to disk. </li>
+ * </ol>
+ * <p>
+ * It does not update this system's cached list of file names.  That list 
+ * will be updated later on with an inotify listener.
+ * </p>
  */
 public class MediaServlet extends HttpServlet {
     public MediaServlet(ScoreBoard sb, String dir) {

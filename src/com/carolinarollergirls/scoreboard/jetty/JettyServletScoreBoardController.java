@@ -30,12 +30,22 @@ import io.prometheus.client.exporter.MetricsServlet;
 import io.prometheus.client.filter.MetricsFilter;
 import io.prometheus.client.hotspot.DefaultExports;
 
+/**
+ * A Jetty web server that provides a web interface to the scoreboard.
+ * <p>
+ * The web server uses WebSockets to provide real-time updates, such
+ * as period clock, to the web interface.  WebSockets is also used to
+ * provide input from the operator such as "StartJam".
+ * </p>
+ */
 public class JettyServletScoreBoardController {
     /**
      * Create the Jetty web server.
      * 
      * @param sb           @todo document this
-     * @param jsm          @todo document this 
+     * @param jsm          Object to manage saving the scoreboard state.
+     *                     <em>This is often just an alias for 
+     *                     {@code sb.getJsm()}</em>!
      * @param host         IP address or hostname for server to listen 
      *                     on.  Set to null or 0.0.0.0 to listen on all 
      *                     network interfaces.  

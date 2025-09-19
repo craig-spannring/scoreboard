@@ -19,8 +19,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.NetworkConnector;
 import org.eclipse.jetty.server.Server;
-// import org.mortbay.jetty.*;
 
+/**
+ * Servlet that handles web browser requests for list of URLs for this server.
+ * <p>
+ * This iterates through this computer's network interfaces to provide
+ * a simple text list of URLs, one per line to the browser.  Each item
+ * contains the protocol (http), IP address or hostname, port number,
+ * and a trailing slash.
+ * </p>
+ */
 public class UrlsServlet extends HttpServlet {
     public UrlsServlet(Server s) { server = s; }
 

@@ -42,6 +42,15 @@ import io.prometheus.client.Counter;
 import io.prometheus.client.Gauge;
 import io.prometheus.client.Histogram;
 
+/**
+ * Servlet to handle creating WebSocket connections to web browser clients.
+ * <p>
+ * This provides a WebSocket endpoint that clients can connect to.  Once
+ * connected, clients can send JSON messages to the server to request
+ * updates or to make changes to the scoreboard.  The server will send
+ * JSON messages back to the client with updates to the scoreboard state.
+ * </p>
+ */
 public class WS extends WebSocketServlet {
 
     public WS(ScoreBoard s, JSONStateManager j, boolean useMetrics) {
