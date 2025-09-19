@@ -28,6 +28,7 @@ import com.carolinarollergirls.scoreboard.utils.ValWithId;
 public class FormatSpecifierViewer {
     public FormatSpecifierViewer(ScoreBoard sb) { setScoreBoard(sb); }
 
+    /** TODO Not used.  Delete? */
     public Map<String, String> getFormatSpecifierDescriptions() {
         Map<String, String> m = new LinkedHashMap<>();
         Iterator<String> keys = scoreBoardValues.keySet().iterator();
@@ -37,12 +38,22 @@ public class FormatSpecifierViewer {
         }
         return m;
     }
-
+    
+    /** 
+    * Set the scoreboard to use in this object and reset values.
+    * <p>
+    * <b>Question:</b> Should this be part of the public interface?  
+    *                  It is only called in the constructor.  Not 
+    *                  sure if it is even safe to call this after
+    *                  construction.
+    * </p>
+    */
     public void setScoreBoard(ScoreBoard sb) {
         scoreBoard = sb;
         setupScoreBoardValues();
     }
-
+    
+    /** TODO Not used.  Delete? */
     public String parse(String format) {
         StringBuffer buffer = new StringBuffer();
         Matcher m = formatPattern.matcher(format);
