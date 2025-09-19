@@ -22,6 +22,16 @@ import com.carolinarollergirls.scoreboard.core.interfaces.ScoreBoard;
 import com.carolinarollergirls.scoreboard.event.ScoreBoardEventProviderImpl;
 import com.carolinarollergirls.scoreboard.utils.BasePath;
 
+/**
+ * Maintain list of media files and provide notifications when list changes. 
+ * <p>
+ * Logically, a media item is identified by the tuple (format, type, 
+ * filename).  Physically, format is a subdirectory of the html directory
+ * inside of BasePath, type is a subdirectory of format, and filename.  
+ * In other words, the file system path is 
+ * <code>BasePath/html/format/type/filename</code>.
+ * </p>
+ */
 public class MediaImpl extends ScoreBoardEventProviderImpl<Media> implements Media {
     public MediaImpl(ScoreBoard parent) {
         super(parent, "", ScoreBoard.MEDIA);
@@ -106,11 +116,31 @@ public class MediaImpl extends ScoreBoardEventProviderImpl<Media> implements Med
         }
     }
 
+    /**
+     * @return True is the name is valid.  Filenames that are not valid  
+     * are names that:
+     * <ol>
+     * <li>Starts with a period</li>
+     * <li>Ends with .db extension (case insensitive</li>
+     * <li>Contains a path separator</li>
+     * </ol>
+     * False if the name is invalid.
+     */
     @Override
     public boolean validFileName(String fn) {
         return !fn.matches("(^\\.)|(\\.[dD][bB]$)|\\\\|/");
     }
 
+    /**
+     * Tell this object that a new media file has been created on disk.
+     * <p/>
+     * Effectively this is used to synchronize the internal list of 
+     * files with the file system.  The function will see if the file 
+     * is already in the list, and if not, add it.
+     * @param format  The media format (e.g. "images")
+     * @param type    The media type (e.g. "sponsor_banner")
+     * @param id      The media file ID, generally the filename (e.g. "mysponsor.png")
+     */
     private void mediaFileCreated(String format, String type, String id) {
         synchronized (coreLock) {
             MediaType mt = getFormat(format).getType(type);
@@ -140,6 +170,13 @@ public class MediaImpl extends ScoreBoardEventProviderImpl<Media> implements Med
         return get(FORMAT, format);
     }
 
+    /**
+     * Deletes a file off disk.
+     * @param format  The media format (e.g. "images")
+     * @param type    The media type (e.g. "sponsor_banner")
+     * @param id      The media file ID, generally the filename (e.g. "mysponsor.png")
+     * @return True if successful
+     */
     @Override
     public boolean removeMediaFile(String format, String type, String id) {
         synchronized (coreLock) {

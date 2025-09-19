@@ -11,9 +11,24 @@ import com.carolinarollergirls.scoreboard.event.Value;
 public interface Media extends ScoreBoardEventProvider {
     public MediaFormat getFormat(String format);
 
-    // Deletes a file off disk. True if successful.
+    /** 
+     * Deletes a file from disk.
+     * <p>
+     * <em>Note: This does not neccesarily remove the file from the list of files. 
+     * That will have to be done in a seperate step, perhaps in a file system 
+     * notifier.</em>
+     * </p>
+     * 
+     * @param format  The media format (e.g. "images", "game-data", etc.)
+     * @param type    The media type (e.g. "sponsor_banner")
+     * @param id      The media file ID, generally the filename (e.g. "mysponsor.png")
+     * @return True if successful
+     */
     public boolean removeMediaFile(String format, String type, String id);
 
+    /** 
+     * Is filename valid according to the rules in the derived class?
+     */
     public boolean validFileName(String fn);
 
     public static Collection<Property<?>> props = new ArrayList<>();
