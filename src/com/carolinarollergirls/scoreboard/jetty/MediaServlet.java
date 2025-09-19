@@ -27,6 +27,9 @@ import org.apache.commons.io.IOUtils;
 
 import com.carolinarollergirls.scoreboard.core.interfaces.ScoreBoard;
 
+/**
+ * Servlet to handle requests from web browser to upload/remove media files
+ */
 public class MediaServlet extends HttpServlet {
     public MediaServlet(ScoreBoard sb, String dir) {
         scoreBoard = sb;
