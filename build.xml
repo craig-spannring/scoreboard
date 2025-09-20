@@ -5,12 +5,13 @@
 	<property name="ant.build.javac.target" value="1.8"/>
 
 	<property name="src.dir" value="src"/>
-	<property name="dest.dir" value="bin"/>
+	<property name="dest.dir" value="build-ant"/>
 	<property name="test.run" value="*" />
 	<property name="test.src.dir" value="tests" />
 	<property name="test.build.dir" value="test-bin" />
 	<property name="jdoc.dir" value="jdoc"/>
 	<property name="version.dest.dir" value="${dest.dir}/com/carolinarollergirls/scoreboard/version"/>
+	<property name="version.vscode.dest.dir" value="bin/com/carolinarollergirls/scoreboard/version"/>
 	<property name="version.release.file" value="release.properties"/>
 
 	<property name="compile.deprecation" value="true"/>
@@ -81,7 +82,15 @@
 			<isfalse value="${isRelease}"/>
 		</condition>
 		<mkdir dir="${version.dest.dir}"/>
+		<mkdir dir="${version.vscode.dest.dir}"/>
 		<propertyfile file="${version.dest.dir}/${version.release.file}">
+			<entry key="release" value="${version}"/>
+			<entry key="release.commit" value="${version.commit}"/>
+			<entry key="release.user" value="${user.name}"/>
+			<entry key="release.time" value="${version.time}"/>
+			<entry key="release.host" value="${host.NAME}"/>
+		</propertyfile>
+		<propertyfile file="${version.vscode.dest.dir}/${version.release.file}">
 			<entry key="release" value="${version}"/>
 			<entry key="release.commit" value="${version.commit}"/>
 			<entry key="release.user" value="${user.name}"/>
@@ -96,20 +105,22 @@
 		<mkdir dir="html/images/teamlogo" />
 		<mkdir dir="html/images/sponsor_banner" />
 		<javac srcdir="${src.dir}"
-			destdir="${dest.dir}"
-			deprecation="${compile.deprecation}"
-			debug="${compile.debug}"
-			verbose="${compile.verbose}"
-			nowarn="${compile.nowarn}"
-			includeAntRuntime="false"
-			includes="com/carolinarollergirls/scoreboard/**" >
-
-			<compilerarg value="-Xlint:all"/>
-			<compilerarg value="-Xlint:-serial"/>
-			<compilerarg value="-Xlint:-options"/>
-			<classpath>
-				<fileset dir="${jar.dir}" includes="deps/*.jar" />
-			</classpath>
+		       destdir="${dest.dir}"
+                       failonerror="true"
+		       fork="true"
+                       deprecation="${compile.deprecation}"
+		       debug="${compile.debug}"
+		       verbose="${compile.verbose}"
+		       nowarn="${compile.nowarn}"
+		       includeAntRuntime="false"
+		       includes="**/*.java">
+                  
+		  <compilerarg value="-Xlint:all"/>
+		  <compilerarg value="-Xlint:-serial"/>
+		  <compilerarg value="-Xlint:-options"/>
+		  <classpath>
+		    <fileset dir="${jar.dir}" includes="deps/*.jar" />
+		  </classpath>
 		</javac>
 
 		<copy todir="${dest.dir}">
