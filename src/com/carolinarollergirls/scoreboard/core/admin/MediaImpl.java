@@ -28,7 +28,7 @@ import com.carolinarollergirls.scoreboard.utils.BasePath;
  * Logically, a media item is identified by the tuple (format, type, 
  * filename).  Physically, format is a subdirectory of the html directory
  * inside of BasePath, type is a subdirectory of format, and filename.  
- * In other words, the file system path is 
+ * In other words, the file system path for each file is 
  * <code>BasePath/html/format/type/filename</code>.
  * </p>
  */
@@ -39,6 +39,22 @@ public class MediaImpl extends ScoreBoardEventProviderImpl<Media> implements Med
         setup(BasePath.get().toPath().resolve("html"));
     }
 
+    /** 
+     * Set up the media directory structure and inotify monitoring.
+     * <p> 
+     * This sets up the directory structure under BasePath/html creating 
+     * directories if needed.  It then sets up some containers to hold 
+     * files for each desired format and type. 
+     * </p><p>
+     * Finally, it creates a thread to monitor the directories for changes.
+     * On changes it will call {@code mediaTypeRefresh()}, 
+     * {@code mediaFileCreated()}, or {@code mediaFileDeleted()} as 
+     * appropriate to synchronize it's list of files with the actual 
+     * files on disk.
+     * </p> 
+     * @param path  The base path to use.  Normally this is "html" 
+     *              subdirectory of BasePath.
+     */
     private void setup(Path path) {
         this.path = path;
         addFormat("images", "fullscreen", "sponsor_banner", "teamlogo");
@@ -103,6 +119,17 @@ public class MediaImpl extends ScoreBoardEventProviderImpl<Media> implements Med
         thread.start();
     }
 
+    /**
+     * Synchronize the internal list of files with the file system.
+     * <p>
+     * Go through the existing list of files and remove any that are no
+     * longer present on disk.  The look through all the files on disk 
+     * in the BasePath/html/format/type directory and add any that
+     * aren't in the in-memory list.
+     * </p>
+     * @param format  The media format (e.g. "images")
+     * @param type    The media type (e.g. "sponsor_banner")
+     */
     private void mediaTypeRefresh(String format, String type) {
         synchronized (coreLock) {
             Path p = path.resolve(format).resolve(type);
@@ -152,7 +179,18 @@ public class MediaImpl extends ScoreBoardEventProviderImpl<Media> implements Med
             }
         }
     }
-
+    
+    /**
+    * Tell this object that a media file has been deleted from disk.
+    * <p/>
+    * Effectively this is used to synchronize the internal list of 
+    * files with the file system.  The function will see if the file 
+    * is already in the list, and if not, add it.
+    * @param format  The media format (e.g. "images")
+    * @param type    The media type (e.g. "sponsor_banner")
+    * @param id      The media file ID, generally the filename (e.g.
+    *                "mysponsor.png")
+    */
     private void mediaFileDeleted(String format, String type, String id) {
         synchronized (coreLock) {
             MediaType mt = getFormat(format).getType(type);
@@ -171,7 +209,10 @@ public class MediaImpl extends ScoreBoardEventProviderImpl<Media> implements Med
     }
 
     /**
-     * Deletes a file off disk.
+     * Delete a file from disk.
+     * <p><b>Note:</b> This does not directly update the internal list of
+     * files.  Instead, it relies on inotify to notice the file has been
+     * deleted and call mediaFileDeleted().</p>
      * @param format  The media format (e.g. "images")
      * @param type    The media type (e.g. "sponsor_banner")
      * @param id      The media file ID, generally the filename (e.g. "mysponsor.png")
@@ -205,6 +246,8 @@ public class MediaImpl extends ScoreBoardEventProviderImpl<Media> implements Med
     }
 
     private Path path;
+
+    /** Notifies when files are added/removed from disk directory. */
     private WatchService watchService;
 
     public class MediaFormatImpl extends ScoreBoardEventProviderImpl<MediaFormat> implements MediaFormat {

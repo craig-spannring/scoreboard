@@ -1,5 +1,8 @@
 package com.carolinarollergirls.scoreboard.core.interfaces;
 
+/** 
+ * Role of a team member in a game.
+ */
 public enum Role {
     NOT_IN_GAME("NotInGame"),
     INELIGIBLE("Ineligible"),

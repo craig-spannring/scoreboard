@@ -35,7 +35,7 @@ public interface Game extends ScoreBoardEventProvider {
     public boolean isInJam();
     public Jam getUpcomingJam();
 
-    // update the references to current/upcoming/just ended TeamJams
+    /** update the references to current/upcoming/just ended TeamJams */
     public void updateTeamJams();
 
     public boolean isInOvertime();

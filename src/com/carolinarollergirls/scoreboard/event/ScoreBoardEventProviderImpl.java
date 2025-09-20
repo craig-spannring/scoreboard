@@ -97,7 +97,7 @@ public abstract class ScoreBoardEventProviderImpl<C extends ScoreBoardEventProvi
     }
 
     /**
-     * Synchronously send events to all listeners in scoreBoardEventListeners.
+     * Synchronously send event to all listeners in scoreBoardEventListeners.
      * @param event the {@link ScoreBoardEvent} to be dispatched to the listeners.
      */
     protected void dispatch(ScoreBoardEvent<?> event) {
@@ -107,13 +107,16 @@ public abstract class ScoreBoardEventProviderImpl<C extends ScoreBoardEventProvi
         }
     }
 
-    /** Enter a new (possibly nested) batch. */
+    /** Enter a new (possibly nested) batch. 
+     * <p>Sends a BATCH_START event to all listeners.</p>
+     */
     protected void requestBatchStart() {
-        // Note- As far as I can tell, this doesn't affect anything except for some checks in the unitt tests.
         scoreBoardChange(new ScoreBoardEvent<>(this, BATCH_START, Boolean.TRUE, Boolean.TRUE));
     }
 
-    /** Exit a (possibly nested) batch. */
+    /** Exit a (possibly nested) batch. 
+     * <p>Sends a BATCH_END event to all listeners.</p>
+     */
     protected void requestBatchEnd() {
         scoreBoardChange(new ScoreBoardEvent<>(this, BATCH_END, Boolean.TRUE, Boolean.TRUE));
     }
