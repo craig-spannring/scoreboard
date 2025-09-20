@@ -65,9 +65,13 @@ public interface Media extends ScoreBoardEventProvider {
         @Override
         public String getId();
         public String getName();
-        public void setName(String s);
-        public String getSrc();
 
+        /** TODO: is this ever used?  Delete if not. */
+        public void setName(String s);
+
+        /** TODO: is this ever used?  Delete if not. */
+        public String getSrc();
+        
         @SuppressWarnings("hiding")
         public static Collection<Property<?>> props = new ArrayList<>();
 
