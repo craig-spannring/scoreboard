@@ -1,3 +1,3 @@
-/** TODO- summarize the purpose of this package. */
+/** Routines to setup games under different penalty sets. */ 
 package com.carolinarollergirls.scoreboard.penalties;
 

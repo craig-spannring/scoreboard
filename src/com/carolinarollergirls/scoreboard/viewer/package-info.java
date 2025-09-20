@@ -1,3 +1,3 @@
-/** TODO- summarize the purpose of this package. */
+/** Different ways of viewing the data */
 package com.carolinarollergirls.scoreboard.viewer;
 

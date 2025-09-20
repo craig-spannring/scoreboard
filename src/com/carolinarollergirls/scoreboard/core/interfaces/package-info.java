@@ -1,3 +1,3 @@
-/** TODO- summarize the purpose of this package. */
+/** Declarations of some public interfaces */ 
 package com.carolinarollergirls.scoreboard.core.interfaces;
 

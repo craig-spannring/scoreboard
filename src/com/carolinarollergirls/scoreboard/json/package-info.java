@@ -1,3 +1,3 @@
-/** TODO- summarize the purpose of this package. */
+/** JSON Helpers */ 
 package com.carolinarollergirls.scoreboard.json;
 
