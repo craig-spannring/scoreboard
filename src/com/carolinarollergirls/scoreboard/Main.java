@@ -149,6 +149,9 @@ public class Main extends Logger {
                 System.out.println("  --metrics, -m              Log metrics for developers");
                 System.out.println("  --help, -h                 Show this help message");
                 System.exit(0);
+            } else if (arg.equals("") || arg.startsWith("one-jar.")) {
+                // JVM can in some cases add a one-jar.silent=, not
+                // sure why it was designed this way, just ignore it.
             } else {
                 System.err.println("Unknown argument: " + arg);
                 System.err.println("Use --help or -h for usage information.");
