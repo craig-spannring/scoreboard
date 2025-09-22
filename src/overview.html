@@ -11,7 +11,10 @@
   <section>
     <h2>Project Description</h2>
     <p>
-      The CRG Scoreboard is a platform independent web based application to track score, time, penalties, and line ups. 
+      The CRG Scoreboard is a platform independent web based
+      application to track score, time, penalties, and line ups.  It
+      is assumed that maintainers of this software will be familiar
+      with roller derby and the structure of play.
     </p>
 
 
@@ -25,6 +28,22 @@
 
   </section>
 
+  <section>
+    <h2>Internal Game Logic</h2>
+    
+  </section>
+
+  <section>
+    <h2>User Interface</h2>
+    The user interface is web browser based.  
+  </section>
+
+  <em>
+    Explain path messages from UI take to go through 
+    com.carolinarollergirls.scoreboard.jetty.WS.WebSocketServlet.ScoreBoardWebSocket.onMessage
+    and eventually down to the execute() method in classes such as GameImpl.
+  </em>
+    
   <section>
     <h2>Packages and Structure</h2>
 
