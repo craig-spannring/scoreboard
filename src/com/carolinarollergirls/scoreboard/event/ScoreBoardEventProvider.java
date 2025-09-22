@@ -4,6 +4,13 @@ import java.util.Collection;
 
 import com.carolinarollergirls.scoreboard.core.interfaces.ScoreBoard;
 
+/**
+ * An interface for anything that can provide ScoreBoardEvents.
+ * <p>
+ * This is implemented by all the main interfaces in the core.interfaces package,
+ * and by many of the classes that implement those interfaces.
+ * </p>
+ */
 public interface ScoreBoardEventProvider extends ValueWithId, Comparable<ScoreBoardEventProvider> {
     /**
      * This should be the frontend string for the Child enum value corresponding to
@@ -27,6 +34,7 @@ public interface ScoreBoardEventProvider extends ValueWithId, Comparable<ScoreBo
     public boolean isAncestorOf(ScoreBoardEventProvider other);
     /**
      * remove all references to this element
+     * <p>Equivalent to {@code delete(Source.UNLINK)}</p>
      */
     public void delete();
     /**
@@ -35,8 +43,7 @@ public interface ScoreBoardEventProvider extends ValueWithId, Comparable<ScoreBo
     public void delete(Source source);
 
     /**
-     * This should return all the values, children, or commands that can be accessed
-     * from the frontend
+     * Return all the values, children, or commands accessible from frontend.
      */
     public Collection<Property<?>> getProperties();
     public Property<?> getProperty(String jsonName);
@@ -106,7 +113,14 @@ public interface ScoreBoardEventProvider extends ValueWithId, Comparable<ScoreBo
     public Integer getMinNumber(NumberedChild<?> prop);
     public Integer getMaxNumber(NumberedChild<?> prop);
 
+    /**
+     * <p>
+     * Equivalent to {@code execute(prop, Source.OTHER)}
+     * </p>
+     * @param prop 
+     */
     public void execute(Command prop);
+
     /**
      * Defaults to doing nothing. Should be overridden in classes that have frontend
      * commands.
@@ -117,6 +131,11 @@ public interface ScoreBoardEventProvider extends ValueWithId, Comparable<ScoreBo
 
     public <T extends ValueWithId> T getElement(Class<T> type, String id);
 
+    /**
+     * Check that the given property is valid for this element.
+     * @param prop   Property to check for existence
+     * @throws IllegalArgumentException if the property does not exist.
+     */
     public void checkProperty(Property<?> prop);
 
     public void cleanupAliases();
@@ -124,6 +143,9 @@ public interface ScoreBoardEventProvider extends ValueWithId, Comparable<ScoreBo
     public static final Value<String> ID = new Value<>(String.class, "Id", "", null);
     public static final Value<Boolean> READONLY = new Value<>(Boolean.class, "Readonly", false, null);
 
+    /**
+     * The source requesting the event, change, or action. 
+     */
     public enum Source {
         WS(false, false),
         AUTOSAVE(false, true),

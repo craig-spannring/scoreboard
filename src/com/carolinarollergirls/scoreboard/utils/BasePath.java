@@ -15,12 +15,13 @@ public class BasePath {
     /**
      * Change location used as top level directory
      * <p>
-     * <em>Note: This is primarily intended for unit tests.</em>
+     * <em>Note: This is primarily intended for unit tests.  Changing 
+     *           this after startup will like result in pain and 
+     *           suffering.</em>
      * </p>
-     * @param path  Directory to be used as base path.
      */
-    public static void set(File path) { 
-        basePath = path; 
+    public static void set(File newBaseDirectory) { 
+        basePath = newBaseDirectory; 
     } 
 
     private static File basePath = new File(".");

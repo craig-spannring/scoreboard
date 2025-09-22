@@ -2,6 +2,15 @@ package com.carolinarollergirls.scoreboard.event;
 
 import java.util.Collection;
 
+/**
+ * The name of a property and the data type associated with it.
+ * <p>
+ * Each Property consists of a JSON name (the name used to access it
+ * from the frontend) and a type (the class of the value it
+ * represents).  Some derived classes extend this to also contain a
+ * value.
+ * </p>
+ */
 public abstract class Property<T> {
     public Property(Class<T> type, String jsonName, Collection<Property<?>> propsToAddTo) {
         this.type = type;

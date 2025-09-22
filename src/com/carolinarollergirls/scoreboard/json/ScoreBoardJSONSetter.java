@@ -29,7 +29,10 @@ import com.carolinarollergirls.scoreboard.utils.ValWithId;
  */
 public class ScoreBoardJSONSetter {
 
-    // check the version of the incoming update and update if necessary
+    /**
+     * Update names to v2025 forms version if data isn't already v2025 format
+     * @param state  a map of JSON paths to values.  Will be modified in place.
+     */
     public static void updateToCurrentVersion(Map<String, Object> state) {
         String version = (String) state.get("ScoreBoard.Version(release)");
         if (version == null) { version = getVersionFromKeys(state.keySet()); }
@@ -239,7 +242,15 @@ public class ScoreBoardJSONSetter {
         return priorLimit;
     }
 
-    // Make a list of sets to a scoreboard, with JSON paths to fields.
+    /**
+     * Set ScoreBoard attributes from JSON paths.
+     * <p>
+     * Make a list of sets to a scoreboard, with JSON paths to fields.
+     * </p>
+     * @param sb     the ScoreBoard to update
+     * @param state  a map of JSON paths to values
+     * @param source the source of the update
+     */
     public static void set(ScoreBoard sb, Map<String, Object> state, Source source) {
         List<JSONSet> jsl = new ArrayList<>();
         for (String key : state.keySet()) {

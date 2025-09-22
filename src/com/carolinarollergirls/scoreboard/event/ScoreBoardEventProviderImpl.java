@@ -717,8 +717,9 @@ public abstract class ScoreBoardEventProviderImpl<C extends ScoreBoardEventProvi
     }
 
     protected void addProperties(Property<?>... props) { addProperties(Arrays.asList(props)); }
-    protected void addProperties(Collection<Property<?>> props) {
-        for (Property<?> prop : props) {
+    protected void addProperties(Collection<Property<?>> propsToAdd) 
+    throws IllegalArgumentException {
+        for (Property<?> prop : propsToAdd) {
             if (properties.containsKey(prop.getJsonName())) {
                 throw new IllegalArgumentException(this.getClass().getName() +
                                                    " can't contain multiple properties wit JSON name " +
@@ -748,6 +749,11 @@ public abstract class ScoreBoardEventProviderImpl<C extends ScoreBoardEventProvi
     protected String providerName;
     protected Class<C> providerClass;
 
+    /**
+     * The properties stored in the obect.
+     * <p><em>describe what a property is and why we have organized
+     * the code around them..</em></p>
+     */
     protected Map<String, Property<?>> properties = new HashMap<>();
 
     protected Set<ScoreBoardListener> scoreBoardEventListeners = new LinkedHashSet<>();
