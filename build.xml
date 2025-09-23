@@ -17,7 +17,7 @@
 	<property name="compile.deprecation" value="true"/>
 	<property name="compile.debug" value="true"/>
 	<property name="compile.nowarn" value="false"/>
-	<property name="compile.verbose" value="false"/>
+	<property name="compile.verbose" value="true"/>
 
 	<property name="jar.dir" value="lib"/>
 	<property name="jar.file" value="crg-scoreboard.jar"/>
