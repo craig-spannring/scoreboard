@@ -82,7 +82,15 @@
 			<isfalse value="${isRelease}"/>
 		</condition>
 		<mkdir dir="${version.dest.dir}"/>
+		<mkdir dir="${version.vscode.dest.dir}"/>
 		<propertyfile file="${version.dest.dir}/${version.release.file}">
+			<entry key="release" value="${version}"/>
+			<entry key="release.commit" value="${version.commit}"/>
+			<entry key="release.user" value="${user.name}"/>
+			<entry key="release.time" value="${version.time}"/>
+			<entry key="release.host" value="${host.NAME}"/>
+		</propertyfile>
+		<propertyfile file="${version.vscode.dest.dir}/${version.release.file}">
 			<entry key="release" value="${version}"/>
 			<entry key="release.commit" value="${version.commit}"/>
 			<entry key="release.user" value="${user.name}"/>
