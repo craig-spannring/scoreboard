@@ -106,7 +106,6 @@
 		<mkdir dir="html/images/sponsor_banner" />
 		<javac srcdir="${src.dir}"
 			destdir="${dest.dir}"
-
                         deprecation="${compile.deprecation}"
 			debug="${compile.debug}"
 			verbose="${compile.verbose}"
