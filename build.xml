@@ -117,13 +117,13 @@
 		<mkdir dir="html/images/sponsor_banner" />
 		<javac srcdir="${src.dir}"
 			destdir="${dest.dir}"
-                        deprecation="${compile.deprecation}"
+			deprecation="${compile.deprecation}"
 			debug="${compile.debug}"
 			verbose="${compile.verbose}"
 			nowarn="${compile.nowarn}"
 			includeAntRuntime="false"
 			includes="**/*.java">
-                        
+			
 			<compilerarg value="-Xlint:all"/>
 			<compilerarg value="-Xlint:-serial"/>
 			<compilerarg value="-Xlint:-options"/>
