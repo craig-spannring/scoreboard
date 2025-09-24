@@ -11,17 +11,17 @@
 	<property name="test.build.dir" value="test-bin" />
 	<property name="jdoc.dir" value="jdoc"/>
 	<property name="version.dest.dir" value="${dest.dir}/com/carolinarollergirls/scoreboard/version"/>
-        <!--
-            VSCode has it's own build system that doesn't play nice
-            with ant.  So we'll let VSCode do its thing, building in
-            bin, and we'll have ant use a different build directory.
+	<!--
+	    VSCode has it's own build system that doesn't play nice
+	    with ant.  So we'll let VSCode do its thing, building in
+	    bin, and we'll have ant use a different build directory.
 
-            In this paradigm, the only thing ant needs to do is create
-            a release.properties on behalf of VSCode.
+	    In this paradigm, the only thing ant needs to do is create
+	    a release.properties on behalf of VSCode.
 
-            TODO- If somebody knows of a way to get VSCode to build
-            the release.properties file, be my guest.
-        -->
+	    TODO- If somebody knows of a way to get VSCode to build
+	    the release.properties file, be my guest.
+	-->
 	<property name="version.vscode.dest.dir" value="bin/com/carolinarollergirls/scoreboard/version"/>
 	<property name="version.release.file" value="release.properties"/>
 
@@ -123,7 +123,7 @@
 			nowarn="${compile.nowarn}"
 			includeAntRuntime="false"
 			includes="**/*.java">
-			
+
 			<compilerarg value="-Xlint:all"/>
 			<compilerarg value="-Xlint:-serial"/>
 			<compilerarg value="-Xlint:-options"/>
@@ -197,9 +197,9 @@
 		<javadoc
 			packagenames="com.carolinarollergirls.scoreboard.*"
 			sourcepath="${src.dir}"
-                        classpath="${jar.dir}/deps/*"
+			classpath="${jar.dir}/deps/*"
 			destdir="${jdoc.dir}"
-                        overview="${src.dir}/overview.html"
+			overview="${src.dir}/overview.html"
 		/>
 		<echo message="Java Documentation placed in ${jdoc.dir}"/>
 	</target>
