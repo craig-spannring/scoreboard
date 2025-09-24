@@ -5,7 +5,7 @@
 	<property name="ant.build.javac.target" value="1.8"/>
 
 	<property name="src.dir" value="src"/>
-	<property name="dest.dir" value="bin"/>
+	<property name="dest.dir" value="build-ant"/>
 	<property name="test.run" value="*" />
 	<property name="test.src.dir" value="tests" />
 	<property name="test.build.dir" value="test-bin" />
@@ -106,13 +106,14 @@
 		<mkdir dir="html/images/sponsor_banner" />
 		<javac srcdir="${src.dir}"
 			destdir="${dest.dir}"
-			deprecation="${compile.deprecation}"
+
+                        deprecation="${compile.deprecation}"
 			debug="${compile.debug}"
 			verbose="${compile.verbose}"
 			nowarn="${compile.nowarn}"
 			includeAntRuntime="false"
-			includes="com/carolinarollergirls/scoreboard/**" >
-
+			includes="**/*.java">
+                        
 			<compilerarg value="-Xlint:all"/>
 			<compilerarg value="-Xlint:-serial"/>
 			<compilerarg value="-Xlint:-options"/>
@@ -186,7 +187,9 @@
 		<javadoc
 			packagenames="com.carolinarollergirls.scoreboard.*"
 			sourcepath="${src.dir}"
+                        classpath="${jar.dir}/deps/*"
 			destdir="${jdoc.dir}"
+                        overview="${src.dir}/overview.html"
 		/>
 		<echo message="Java Documentation placed in ${jdoc.dir}"/>
 	</target>
