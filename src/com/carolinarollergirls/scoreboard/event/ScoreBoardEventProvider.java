@@ -27,9 +27,6 @@ public interface ScoreBoardEventProvider extends ValueWithId, Comparable<ScoreBo
      * e.g. be a Period/Jam/etc number or a UUID.)
      */
     public String getProviderId();
-    /**
-     * The parent element.
-     */
     public ScoreBoardEventProvider getParent();
     public boolean isAncestorOf(ScoreBoardEventProvider other);
     /**
@@ -37,14 +34,10 @@ public interface ScoreBoardEventProvider extends ValueWithId, Comparable<ScoreBo
      * <p>Equivalent to {@code delete(Source.UNLINK)}</p>
      */
     public void delete();
-    /**
-     * remove all references to this element
-     */
+    /** remove all references to this element */
     public void delete(Source source);
 
-    /**
-     * Return all the values, children, or commands accessible from frontend.
-     */
+    /** Return all values, children, or commands accessible from frontend. */
     public Collection<Property<?>> getProperties();
     public Property<?> getProperty(String jsonName);
 
@@ -81,9 +74,7 @@ public interface ScoreBoardEventProvider extends ValueWithId, Comparable<ScoreBo
      * sValue.
      */
     public <T extends ValueWithId> T childFromString(Child<T> prop, String id, String sValue);
-    /*
-     * Will return null if no such child is found
-     */
+    /** @return null if no such child is found */
     public <T extends ValueWithId> T get(Child<T> prop, String id);
     public <T extends OrderedScoreBoardEventProvider<T>> T get(NumberedChild<T> prop, Integer num);
     public <T extends ScoreBoardEventProvider> T getOrCreate(Child<T> prop, String id);
@@ -98,7 +89,7 @@ public interface ScoreBoardEventProvider extends ValueWithId, Comparable<ScoreBo
     // returns true, if a value was either changed or added
     public <T extends ValueWithId> boolean add(Child<T> prop, T item);
     public <T extends ValueWithId> boolean add(Child<T> prop, T item, Source source);
-    // returns true, if a value was removed
+    /** @return true if a value was removed */
     public <T extends ValueWithId> boolean remove(Child<T> prop, String id);
     public <T extends ValueWithId> boolean remove(Child<T> prop, String id, Source source);
     public <T extends ValueWithId> boolean remove(Child<T> prop, T item);
@@ -132,7 +123,7 @@ public interface ScoreBoardEventProvider extends ValueWithId, Comparable<ScoreBo
     public <T extends ValueWithId> T getElement(Class<T> type, String id);
 
     /**
-     * Check that the given property is valid for this element.
+     * Verify JSON name of {@code prop} is in this object's set of properties.
      * @param prop   Property to check for existence
      * @throws IllegalArgumentException if the property does not exist.
      */
@@ -143,9 +134,7 @@ public interface ScoreBoardEventProvider extends ValueWithId, Comparable<ScoreBo
     public static final Value<String> ID = new Value<>(String.class, "Id", "", null);
     public static final Value<Boolean> READONLY = new Value<>(Boolean.class, "Readonly", false, null);
 
-    /**
-     * The source requesting the event, change, or action. 
-     */
+    /** Type of the source requesting the event, change, or action. */
     public enum Source {
         WS(false, false),
         AUTOSAVE(false, true),
@@ -162,9 +151,9 @@ public interface ScoreBoardEventProvider extends ValueWithId, Comparable<ScoreBo
         ANY_FILE(false, true),
         NON_WS(true, true);
 
-        private Source(boolean i, boolean f) {
-            internal = i;
-            file = f;
+        private Source(boolean internal_, boolean file_) {
+            internal = internal_;
+            file = file_;
         }
 
         private final boolean internal;
