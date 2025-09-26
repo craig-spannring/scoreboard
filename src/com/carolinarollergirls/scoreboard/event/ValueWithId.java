@@ -7,7 +7,7 @@ package com.carolinarollergirls.scoreboard.event;
 public interface ValueWithId {
     /**
      * Id used to identify this element.
-     * </p>
+     * <p>
      * Id to be used in order to identify this element amongst all
      * elements of its type. Used when the element is referenced by
      * elements other than its parent.  (Typically a UUID.)
@@ -17,12 +17,13 @@ public interface ValueWithId {
         
     /**
      * Value of the element
+     * @return The stored string.
      * <p>
-     * Implementations can use this field for any purpose.  For
-     * example, implementations of ScoreBoardEventProvider this should
-     * usually be the same as getId() Other implementations may have
-     * have a comma-separated list of values.
-     * </p>
+     * Implementations of this interface can use this field for any
+     * purpose.  For example, in implementations of
+     * ScoreBoardEventProvider this is usually be the same as getId()
+     * Other implementations could store data related to the ID.
+     * </p>     
      */
     public String getValue();
 }
