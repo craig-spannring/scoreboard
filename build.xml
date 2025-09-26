@@ -106,15 +106,15 @@
 		<mkdir dir="html/images/sponsor_banner" />
 		<javac srcdir="${src.dir}"
 		       destdir="${dest.dir}"
-                       failonerror="true"
+		       failonerror="true"
 		       fork="true"
-                       deprecation="${compile.deprecation}"
+		       deprecation="${compile.deprecation}"
 		       debug="${compile.debug}"
 		       verbose="${compile.verbose}"
 		       nowarn="${compile.nowarn}"
 		       includeAntRuntime="false"
 		       includes="**/*.java">
-                  
+		  
 		  <compilerarg value="-Xlint:all"/>
 		  <compilerarg value="-Xlint:-serial"/>
 		  <compilerarg value="-Xlint:-options"/>
@@ -188,9 +188,9 @@
 		<javadoc
 			packagenames="com.carolinarollergirls.scoreboard.*"
 			sourcepath="${src.dir}"
-                        classpath="${jar.dir}/deps/*"
+			classpath="${jar.dir}/deps/*"
 			destdir="${jdoc.dir}"
-                        overview="${src.dir}/overview.html"
+			overview="${src.dir}/overview.html"
 		/>
 		<echo message="Java Documentation placed in ${jdoc.dir}"/>
 	</target>
