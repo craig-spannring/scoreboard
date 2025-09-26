@@ -122,13 +122,11 @@ public class MediaImpl extends ScoreBoardEventProviderImpl<Media> implements Med
     /**
      * Synchronize the internal list of files with the file system.
      * <p>
-     * Go through the existing list of files and remove any that are no
-     * longer present on disk.  The look through all the files on disk 
-     * in the BasePath/html/format/type directory and add any that
-     * aren't in the in-memory list.
+     * Update in-memory list of files to match contents of the
+     * <em>BasePath</em>/html/<em>format</em>/<em>type</em> directory.
      * </p>
-     * @param format  The media format (e.g. "images")
-     * @param type    The media type (e.g. "sponsor_banner")
+     * @param format  The media format subdirectory (e.g. "images")
+     * @param type    The media type subdirectory (e.g. "sponsor_banner")
      */
     private void mediaTypeRefresh(String format, String type) {
         synchronized (coreLock) {
@@ -160,10 +158,11 @@ public class MediaImpl extends ScoreBoardEventProviderImpl<Media> implements Med
 
     /**
      * Tell this object that a new media file has been created on disk.
-     * <p/>
+     * <p>
      * Effectively this is used to synchronize the internal list of 
      * files with the file system.  The function will see if the file 
      * is already in the list, and if not, add it.
+     * </p>
      * @param format  The media format (e.g. "images")
      * @param type    The media type (e.g. "sponsor_banner")
      * @param id      The media file ID, generally the filename (e.g. "mysponsor.png")
@@ -179,18 +178,15 @@ public class MediaImpl extends ScoreBoardEventProviderImpl<Media> implements Med
             }
         }
     }
-    
+
     /**
-    * Tell this object that a media file has been deleted from disk.
-    * <p/>
-    * Effectively this is used to synchronize the internal list of 
-    * files with the file system.  The function will see if the file 
-    * is already in the list, and if not, add it.
-    * @param format  The media format (e.g. "images")
-    * @param type    The media type (e.g. "sponsor_banner")
-    * @param id      The media file ID, generally the filename (e.g.
-    *                "mysponsor.png")
-    */
+     * Tell this object that a media file has been deleted from disk.
+     * <p>The function removes the filename from the internal list. </p>
+     * @param format  The media format (e.g. "images")
+     * @param type    The media type (e.g. "sponsor_banner")
+     * @param id      The media file ID, generally the filename (e.g.
+     *                "mysponsor.png")
+     */
     private void mediaFileDeleted(String format, String type, String id) {
         synchronized (coreLock) {
             MediaType mt = getFormat(format).getType(type);
