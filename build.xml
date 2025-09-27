@@ -11,13 +11,24 @@
 	<property name="test.build.dir" value="test-bin" />
 	<property name="jdoc.dir" value="jdoc"/>
 	<property name="version.dest.dir" value="${dest.dir}/com/carolinarollergirls/scoreboard/version"/>
+	<!--
+	    VSCode has it's own build system that doesn't play nice
+	    with ant.  So we'll let VSCode do its thing, building in
+	    bin, and we'll have ant use a different build directory.
+
+	    In this paradigm, the only thing ant needs to do is create
+	    a release.properties on behalf of VSCode.
+
+	    TODO- If somebody knows of a way to get VSCode to build
+	    the release.properties file, be my guest.
+	-->
 	<property name="version.vscode.dest.dir" value="bin/com/carolinarollergirls/scoreboard/version"/>
 	<property name="version.release.file" value="release.properties"/>
 
 	<property name="compile.deprecation" value="true"/>
 	<property name="compile.debug" value="true"/>
 	<property name="compile.nowarn" value="false"/>
-	<property name="compile.verbose" value="false"/>
+	<property name="compile.verbose" value="true"/>
 
 	<property name="jar.dir" value="lib"/>
 	<property name="jar.file" value="crg-scoreboard.jar"/>
@@ -105,22 +116,20 @@
 		<mkdir dir="html/images/teamlogo" />
 		<mkdir dir="html/images/sponsor_banner" />
 		<javac srcdir="${src.dir}"
-		       destdir="${dest.dir}"
-		       failonerror="true"
-		       fork="true"
-		       deprecation="${compile.deprecation}"
-		       debug="${compile.debug}"
-		       verbose="${compile.verbose}"
-		       nowarn="${compile.nowarn}"
-		       includeAntRuntime="false"
-		       includes="**/*.java">
-		  
-		  <compilerarg value="-Xlint:all"/>
-		  <compilerarg value="-Xlint:-serial"/>
-		  <compilerarg value="-Xlint:-options"/>
-		  <classpath>
-		    <fileset dir="${jar.dir}" includes="deps/*.jar" />
-		  </classpath>
+			destdir="${dest.dir}"
+			deprecation="${compile.deprecation}"
+			debug="${compile.debug}"
+			verbose="${compile.verbose}"
+			nowarn="${compile.nowarn}"
+			includeAntRuntime="false"
+			includes="**/*.java">
+
+			<compilerarg value="-Xlint:all"/>
+			<compilerarg value="-Xlint:-serial"/>
+			<compilerarg value="-Xlint:-options"/>
+			<classpath>
+				<fileset dir="${jar.dir}" includes="deps/*.jar" />
+			</classpath>
 		</javac>
 
 		<copy todir="${dest.dir}">
