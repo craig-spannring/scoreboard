@@ -142,14 +142,14 @@ public class MediaImpl extends ScoreBoardEventProviderImpl<Media> implements Med
     }
 
     /**
-     * @return True is the name is valid.  Filenames that are not valid  
-     * are names that:
+     * @return True for valid file names, false otherwise.
+     * <p>Invalid file names are names that:
      * <ol>
-     * <li>Starts with a period</li>
-     * <li>Ends with .db extension (case insensitive</li>
-     * <li>Contains a path separator</li>
+     * <li>Start with a period</li>
+     * <li>or end with .db extension (case insensitive</li>
+     * <li>or contains a path separator</li>
      * </ol>
-     * False if the name is invalid.
+     * </p>
      */
     @Override
     public boolean validFileName(String fn) {
