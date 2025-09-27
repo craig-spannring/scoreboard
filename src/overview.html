@@ -24,53 +24,46 @@
       <li>Cross Platform                   </li>
       <li>Able to run on older hardware    </li>
     </ul>
-
-
   </section>
 
   <section>
     <h2>Internal Game Logic</h2>
-    
   </section>
 
   <section>
     <h2>User Interface</h2>
     The user interface is web browser based.  
+
+    <p> 
+      <em>
+        Explain path messages from UI take to go through 
+        com.carolinarollergirls.scoreboard.jetty.WS.WebSocketServlet.ScoreBoardWebSocket.onMessage
+        and eventually down to the execute() method in classes such as GameImpl.
+      </em>
+    </p>
   </section>
-
-  <em>
-    Explain path messages from UI take to go through 
-    com.carolinarollergirls.scoreboard.jetty.WS.WebSocketServlet.ScoreBoardWebSocket.onMessage
-    and eventually down to the execute() method in classes such as GameImpl.
-  </em>
-    
+  
   <section>
-    <h2>Packages and Structure</h2>
-
-    <ul>      
-      <li><strong>Input Handling (<code>com.carolinarollergirls.scoreboard.???</code>)</strong>
+    <h2>Third Party Libraries and Frameworks</h2>
+    <ul>
+      <li>Java
         <ul>
-          <li>TODO- Add info</li>
+          <li> jetty (9.4.44)     </li>
+          <li> websocket (9.4.44) </li>
+          <li> xmlbeans (3.1.0)   </li>
+          <li> jackson (3.6.1)    </li>
+        </ul>
+      </li>
+      <li>Javascript 
+        <ul>
+          <li> gamepad.js (unknown origin and version)                 </li>
+          <li> jquery.js (As of 2025.5 this program uses jQuery 3.7.1) </li>
         </ul>
       </li>
     </ul>
   </section>
-
-  <section>
-    <h2>Features</h2>
-    <ul>
-      <li><strong>TODO: Add feature name</strong>: add description  </li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Purpose and Goals</h2>
-    <p>
-
-    </p>
-  </section>
-
-
+    
+  
   <section>
     <h2>See Also</h2>
     <ul>
