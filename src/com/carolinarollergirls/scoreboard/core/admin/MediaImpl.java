@@ -142,18 +142,19 @@ public class MediaImpl extends ScoreBoardEventProviderImpl<Media> implements Med
     }
 
     /**
+     * Is the file name valid?.
+     * 
+     * Rules for a valid file name:
+     *   <ol>
+     *     <li>Does not start with a period                           </li>
+     *     <li>and does not end with .db extension (case insensitive) </li>
+     *     <li>and does not contain a path separator                  </li>
+     *   </ol>
      * @return True for valid file names, false otherwise.
-     * <p>Invalid file names are names that:
-     * <ol>
-     * <li>Start with a period</li>
-     * <li>or end with .db extension (case insensitive</li>
-     * <li>or contains a path separator</li>
-     * </ol>
-     * </p>
      */
     @Override
-    public boolean validFileName(String fn) {
-        return !fn.matches("(^\\.)|(\\.[dD][bB]$)|\\\\|/");
+    public boolean validFileName(String filename) {
+        return !filename.matches("(^\\.)|(\\.[dD][bB]$)|\\\\|/");
     }
 
     /**
