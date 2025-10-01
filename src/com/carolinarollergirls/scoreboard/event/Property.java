@@ -7,8 +7,7 @@ import java.util.Collection;
  * <p>
  * Each Property consists of a JSON name (the name used to access it
  * from the frontend) and a type (the class of the value it
- * represents).  Some derived classes extend this to also contain a
- * value.
+ * represents).  
  * </p>
  */
 public abstract class Property<T> {
