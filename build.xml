@@ -64,16 +64,17 @@
 		<echo message=""/>
 		<echo message="Targets:"/>
 		<echo message=""/>
-		<echo message="	all							clean compile"/>
-		<echo message="	clean						Clean everything"/>
-		<echo message="	compile					Compile all classes and create jarfile"/>
-		<echo message="	test					Compile all classes and run unit tests (default)"/>
-		<echo message="	launcher				 Create Windows scoreboard.exe"/>
-		<echo message="	manifest				 (Re)create the manifest file"/>
-		<echo message="	help						 Show this help"/>
-		<echo message="	jdoc						 Create JavaDOC"/>
-		<echo message="	release					Create release zip file based on a git tag"/>
-		<echo message="	zip							Create non-release zip file"/>
+		<echo message="    all        clean compile"/>
+		<echo message="    clean      Clean everything"/>
+		<echo message="    compile    Compile all classes and create jarfile"/>
+		<echo message="    test       Compile all classes and run unit tests (default)"/>
+		<echo message="    launcher   Create Windows scoreboard.exe"/>
+		<echo message="    manifest   (Re)create the manifest file"/>
+		<echo message="    help       Show this help"/>
+		<echo message="    jdoc       Create JavaDOC"/>
+		<echo message="    spotbugs   Generate static code analysis (only if spotbugs is found)"/>
+		<echo message="    release    Create release zip file based on a git tag"/>
+		<echo message="    zip        Create non-release zip file"/>
 		<echo message=""/>
 	</target>
 
@@ -190,6 +191,34 @@
 		</manifest>
 		<echo message="Created ${jar.dir}/${manifest.file}" />
 	</target>
+
+        <!-- Run spotbugs -->
+        <property name="spotbugs.home" value="spotbugs/." />
+        <condition property="spotbugs.available">
+          <available file="${spotbugs.home}" type="dir" />
+        </condition>
+        <target name="spotbugs-setup" if="spotbugs.available">
+          <taskdef
+              resource="edu/umd/cs/findbugs/anttask/tasks.properties"
+              classpath="${spotbugs.home}/lib/spotbugs-ant.jar" />
+        </target>
+        <target name="spotbugs-none" unless="spotbugs.available">
+          <echo>Spotbugs not found.  Skipping.</echo>
+          <echo></echo>
+          <echo>    AFAIK, there isn't a standard install location for     </echo>
+          <echo>    spotbugs.  If you want to run spotbugs, you'll need to </echo>
+          <echo>    symlink spotbugs to your installation of spotbugs.     </echo>
+        </target>
+        <target name="spotbugs" depends="compile,spotbugs-none,spotbugs-setup" if="spotbugs.available">
+          <spotbugs home="${spotbugs.home}"
+                    includeFilter="spotbugs-incl-filter.xml"
+                    excludeFilter="spotbugs-excl-filter.xml"
+                    output="emacs">
+            <auxClasspath path="${jar.dir}/deps/Regex.jar" /> 
+            <sourcePath path="${src.dir}" />
+            <class location="${jar.dir}/crg-scoreboard.jar" />
+          </spotbugs>
+        </target>
 
 	<!-- Create JavaDOC -->
 	<target name="jdoc">
