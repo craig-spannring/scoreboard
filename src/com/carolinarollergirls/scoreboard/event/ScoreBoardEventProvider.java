@@ -54,7 +54,7 @@ public interface ScoreBoardEventProvider extends ValueWithId, Comparable<ScoreBo
      * need to be implemented in overrides.
      */
     public <T> boolean set(Value<T> prop, T value, Flag flag);
-    // return value indicates if value was changed
+    /** @return true if stored value was changed. */
     public <T> boolean set(Value<T> prop, T value, Source source);
     /*
      * return value indicates if value was changed Change flag for Integer and Long
