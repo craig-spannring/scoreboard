@@ -54,42 +54,53 @@ public class RulesetsImpl extends ScoreBoardEventProviderImpl<Rulesets> implemen
 
     private void addDefaultRulesets(Ruleset root) {
         RulesetImpl jrda = new RulesetImpl(this, "JRDA", root, "JRDARuleset");
-        jrda.setRule("Jam.SuddenScoring", "true");
-        jrda.setRule("Jam.InjuryContinuation", "true");
-        jrda.set(READONLY, true);
+        jrda.setRule(Rule.SUDDEN_SCORING, true).setRule(Rule.INJURY_CONTINUATION, true).set(READONLY, true);
         add(RULESET, jrda);
 
         RulesetImpl sevens = new RulesetImpl(this, "Sevens", root, "SevensRuleset");
-        sevens.setRule("Intermission.Durations", "60:00");
-        sevens.setRule("Penalties.NumberToFoulout", "4");
-        sevens.setRule("Period.Duration", "21:00");
-        sevens.setRule("Period.Number", "1");
-        sevens.setRule("Team.OfficialReviews", "0");
-        sevens.setRule("Team.Timeouts", "0");
-        sevens.set(READONLY, true);
+        sevens.setRule(Rule.INTERMISSION_DURATIONS, "60:00")
+            .setRule(Rule.FO_LIMIT, 4)
+            .setRule(Rule.PERIOD_DURATION, "21:00")
+            .setRule(Rule.NUMBER_PERIODS, 1)
+            .setRule(Rule.NUMBER_REVIEWS, 0)
+            .setRule(Rule.NUMBER_TIMEOUTS, 0)
+            .set(READONLY, true);
         add(RULESET, sevens);
 
         RulesetImpl rdcl = new RulesetImpl(this, "RDCL", root, "RDCLRuleset");
-        rdcl.setRule("Intermission.Durations", "5:00,15:00,5:00,60:00");
-        rdcl.setRule("Jam.Duration", "1:00");
-        rdcl.setRule("Jam.ResetNumberEachPeriod", "false");
-        rdcl.setRule("Penalties.DefinitionFile", "/config/penalties/RDCL.json");
-        rdcl.setRule("Period.Duration", "15:00");
-        rdcl.setRule("Period.EndBetweenJams", "false");
-        rdcl.setRule("Period.Number", "4");
-        rdcl.setRule("Team.RDCLPerHalfRules", "true");
-        rdcl.setRule("Score.WftdaLateChangeRule", "false");
-        rdcl.set(READONLY, true);
+        rdcl.setRule(Rule.INTERMISSION_DURATIONS, "5:00,15:00,5:00,60:00")
+            .setRule(Rule.JAM_DURATION, "1:00")
+            .setRule(Rule.JAM_NUMBER_PER_PERIOD, false)
+            .setRule(Rule.PENALTIES_FILE, "/config/penalties/RDCL.json")
+            .setRule(Rule.PERIOD_DURATION, "15:00")
+            .setRule(Rule.PERIOD_END_BETWEEN_JAMS, false)
+            .setRule(Rule.NUMBER_PERIODS, 4)
+            .setRule(Rule.RDCL_PER_HALF_RULES, true)
+            .setRule(Rule.WFTDA_LATE_SCORE_RULE, false)
+            .set(READONLY, true);
         add(RULESET, rdcl);
 
         RulesetImpl rdclHalf = new RulesetImpl(this, "RDCL half game", rdcl, "RDCLHalfGameRuleset");
-        rdclHalf.setRule("Intermission.Durations", "5:00,60:00");
-        rdclHalf.setRule("Penalties.NumberToFoulout", "4");
-        rdclHalf.setRule("Period.Number", "2");
-        rdclHalf.setRule("Team.Timeouts", "1");
-        rdclHalf.setRule("Team.TimeoutsPer", "true");
-        rdclHalf.set(READONLY, true);
+        rdclHalf.setRule(Rule.INTERMISSION_DURATIONS, "5:00,60:00")
+            .setRule(Rule.FO_LIMIT, 4)
+            .setRule(Rule.NUMBER_PERIODS, 2)
+            .setRule(Rule.NUMBER_TIMEOUTS, 1)
+            .setRule(Rule.TIMEOUTS_PER_PERIOD, true)
+            .set(READONLY, true);
         add(RULESET, rdclHalf);
+
+        RulesetImpl shortTrack = new RulesetImpl(this, "Short Track", root, "ShortTrackRuleset");
+        shortTrack.setRule(Rule.JAMS_PER_PERIOD, 10)
+            .setRule(Rule.JAM_DURATION, "1:00")
+            .setRule(Rule.NUMBER_TIMEOUTS, 1)
+            .setRule(Rule.NUMBER_REVIEWS, 0)
+            .setRule(Rule.PENALTY_POINTS_DEDUCTION, 2)
+            .setRule(Rule.PENALTY_DURATION, 0L)
+            .setRule(Rule.OVERTIME_LINEUP_DURATION, "0:30")
+            .setRule(Rule.POINTS_ON_INITIAL, true)
+            .setRule(Rule.WFTDA_LATE_SCORE_RULE, false)
+            .set(READONLY, true);
+        add(RULESET, shortTrack);
     }
 
     @Override
@@ -163,9 +174,13 @@ public class RulesetsImpl extends ScoreBoardEventProviderImpl<Rulesets> implemen
             Ruleset parentRs = rs.getParentRuleset();
             return this == rs || this.isAncestorOf(parentRs);
         }
-        @Override
-        public void setRule(String id, String value) {
+        private Ruleset setRule(String id, String value) {
             add(RULE, new ValWithId(id, value));
+            return this;
+        }
+        @Override
+        public Ruleset setRule(Rule r, Object value) {
+            return setRule(r.toString(), value.toString());
         }
     }
 }

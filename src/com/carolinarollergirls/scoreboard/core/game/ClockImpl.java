@@ -126,7 +126,11 @@ public class ClockImpl extends ScoreBoardEventProviderImpl<Clock> implements Clo
             // Get default values from current settings or use hardcoded values
             setCountDirectionDown(Boolean.parseBoolean(game.get(Game.RULE, subId + ".ClockDirection").getValue()));
             if (subId.equals(ID_PERIOD)) {
-                setMaximumTime(game.getLong(Rule.PERIOD_DURATION));
+                if (game.getInt(Rule.JAMS_PER_PERIOD) > 0) {
+                    setMaximumTime(game.getInt(Rule.JAMS_PER_PERIOD) * game.getLong(Rule.JAM_DURATION));
+                } else {
+                    setMaximumTime(game.getLong(Rule.PERIOD_DURATION));
+                }
             } else if (subId.equals(ID_JAM)) {
                 set(MAXIMUM_TIME, game.getLong(Rule.JAM_DURATION), Source.RECALCULATE);
             } else if (subId.equals(ID_INTERMISSION)) {
