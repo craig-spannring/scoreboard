@@ -67,7 +67,8 @@ public class TeamImpl extends ScoreBoardEventProviderImpl<Team> implements Team 
         setCopy(STAR_PASS_TRIP, this, RUNNING_OR_ENDED_TEAM_JAM, TeamJam.STAR_PASS_TRIP, false);
         scoreListener = setRecalculated(SCORE)
                             .addIndirectSource(this, RUNNING_OR_ENDED_TEAM_JAM, TeamJam.TOTAL_SCORE)
-                            .addSource(this, SCORE_ADJUSTMENT);
+                            .addSource(this, SCORE_ADJUSTMENT)
+                            .addSource(this, TOTAL_PENALTIES);
         penaltyListener = setRecalculated(TOTAL_PENALTIES).addSource(this, SKATER);
         setRecalculated(IN_TIMEOUT)
             .addIndirectSource(g, Game.CURRENT_TIMEOUT, Timeout.OWNER)
@@ -189,15 +190,16 @@ public class TeamImpl extends ScoreBoardEventProviderImpl<Team> implements Team 
         if (prop == TRIP_SCORE && source != Source.COPY) {
             tripScoreTimerTask.cancel();
             if (((Integer) value > 0 || flag != Flag.CHANGE) && getCurrentTrip().getNumber() == 1 &&
-                !game.isInOvertime() && !game.isInSuddenScoring() && source == Source.WS) {
-                // If points arrive during an initial trip and we are not in overtime, assign
+                !game.isInOvertime() && !game.isInSuddenScoring() && !game.getBoolean(Rule.POINTS_ON_INITIAL) &&
+                source == Source.WS) {
+                // If points arrive during an initial trip and we don't expect points to happen during initial, assign
                 // the points to the first scoring trip instead.
                 getCurrentTrip().set(ScoringTrip.ANNOTATION, "Points were added without Add Trip\n" +
                                                                  getCurrentTrip().get(ScoringTrip.ANNOTATION));
                 execute(ADD_TRIP);
             }
             if (game.isInJam() && ((Integer) value > 0 || ((Integer) last == 0 && flag != Flag.CHANGE))) {
-                // we are during a jam and either points have been entered or the trip score has
+                // We are during a jam and either points have been entered or the trip score has
                 // been explicitly set to 0 - set a timer to advance the trip
                 tripScoreTimer.purge();
                 tripScoreJamTime = getCurrentTrip().get(ScoringTrip.JAM_CLOCK_END);
@@ -220,6 +222,7 @@ public class TeamImpl extends ScoreBoardEventProviderImpl<Team> implements Team 
         if (prop == SCORE) {
             int sum = getRunningOrEndedTeamJam().getTotalScore();
             for (ScoreAdjustment adjustment : getAll(SCORE_ADJUSTMENT)) { sum += adjustment.getAmount(); }
+            sum -= get(TOTAL_PENALTIES) * game.getInt(Rule.PENALTY_POINTS_DEDUCTION);
             return sum;
         }
         if (prop == NO_INITIAL && source != Source.COPY) {
