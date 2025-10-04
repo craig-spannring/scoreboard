@@ -106,7 +106,7 @@ public class TimeoutImpl extends ScoreBoardEventProviderImpl<Timeout> implements
     }
 
     @Override
-    public void stop() {
+    public void stop(boolean isLateStop) {
         set(RUNNING, false);
         if (getOwner() == Owners.NONE) { set(OWNER, Owners.OTO); }
         set(WALLTIME_END, ScoreBoardClock.getInstance().getCurrentWalltime());
