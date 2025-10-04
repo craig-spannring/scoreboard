@@ -83,6 +83,7 @@ public class GameImpl extends ScoreBoardEventProviderImpl<Game> implements Game 
                 if (nso.get(Official.NAME) == hnsoName) { set(HEAD_NSO, nso); }
             }
         }
+        jsonSnapshotter = new JSONStateSnapshotter(getScoreBoard().getJsm(), this, getScoreBoard().useMetrics());
     }
 
     private void initReferences(Ruleset rs, Game source) {
