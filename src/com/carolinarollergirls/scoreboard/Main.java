@@ -284,3 +284,10 @@ public class Main extends Logger {
 
     private static ScoreBoard scoreBoard;
 }
+
+
+/**
+@mainpage CRG Scoreboard
+
+We need to add stuff here.
+*/

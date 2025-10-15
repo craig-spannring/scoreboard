@@ -10,6 +10,8 @@
 	<property name="test.src.dir" value="tests" />
 	<property name="test.build.dir" value="test-bin" />
 	<property name="jdoc.dir" value="jdoc"/>
+	<property name="doxy.dir" value="doxydocs"/>
+        <property name="doxy.config.file" value="Doxyfile"/>
 	<property name="version.dest.dir" value="${dest.dir}/com/carolinarollergirls/scoreboard/version"/>
 	<!--
 	    VSCode has it's own build system that doesn't play nice
@@ -64,16 +66,17 @@
 		<echo message=""/>
 		<echo message="Targets:"/>
 		<echo message=""/>
-		<echo message="	all							clean compile"/>
-		<echo message="	clean						Clean everything"/>
-		<echo message="	compile					Compile all classes and create jarfile"/>
-		<echo message="	test					Compile all classes and run unit tests (default)"/>
-		<echo message="	launcher				 Create Windows scoreboard.exe"/>
-		<echo message="	manifest				 (Re)create the manifest file"/>
-		<echo message="	help						 Show this help"/>
-		<echo message="	jdoc						 Create JavaDOC"/>
-		<echo message="	release					Create release zip file based on a git tag"/>
-		<echo message="	zip							Create non-release zip file"/>
+		<echo message="	all        clean compile"/>
+		<echo message="	clean      Clean everything"/>
+		<echo message="	compile    Compile all classes and create jarfile"/>
+		<echo message="	test       Compile all classes and run unit tests (default)"/>
+		<echo message="	launcher   Create Windows scoreboard.exe"/>
+		<echo message="	manifest   (Re)create the manifest file"/>
+		<echo message="	help       Show this help"/>
+		<echo message="	jdoc       Create JavaDOC"/>
+		<echo message="	doxydocs   Create Doxy Docs"/>
+		<echo message="	release    Create release zip file based on a git tag"/>
+		<echo message="	zip        Create non-release zip file"/>
 		<echo message=""/>
 	</target>
 
@@ -204,6 +207,13 @@
 		<echo message="Java Documentation placed in ${jdoc.dir}"/>
 	</target>
 
+	<!-- Create Doxydocs -->
+        <target name="doxydocs" description="Generate Doxygen documentation">
+          <exec executable="doxygen">
+            <arg value="${doxy.config.file}"/>
+          </exec>
+        </target>
+
 	<!-- Do everything -->
 	<target name="all" depends="clean,test"/>
 
@@ -267,6 +277,7 @@
 			<fileset dir="${dest.dir}"/>
 			<fileset dir="${jar.dir}" includes="${jar.file}"/>
 			<fileset dir="${jdoc.dir}"/>
+                        <fileset dir="${doxy.dir}"/>
 			<fileset dir="${test.build.dir}"/>
 		</delete>
 	</target>
